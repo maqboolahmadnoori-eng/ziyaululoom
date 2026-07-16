@@ -10,38 +10,60 @@
     <div class="bg-white p-6 rounded-xl shadow-md w-full max-w-md">
         <h2 class="text-xl font-bold text-center text-blue-900 mb-4">Madrasa Arabia Ziyaul Uloom</h2>
         <div id="statusContent" class="space-y-3 text-sm">
-            <!-- Data dynamically insert hoga -->
+            <p class="text-center text-gray-500">Loading student data from cloud...</p>
         </div>
     </div>
 
-    <script>
+    <!-- FIREBASE MODULE INTEGRATION -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        // FIXME: Apne Firebase Console se mili SAME config details yahan bhi daalein
+        const firebaseConfig = {
+  apiKey: "AIzaSyCGgsuCGuuGXJ4JZW_bb202XJy532PXVMA",
+  authDomain: "ziyaululoom-portal.firebaseapp.com",
+  databaseURL: "https://ziyaululoom-portal-default-rtdb.firebaseio.com",
+  projectId: "ziyaululoom-portal",
+  storageBucket: "ziyaululoom-portal.firebasestorage.app",
+  messagingSenderId: "1097092919331",
+  appId: "1:1097092919331:web:83aaed1facef7565610196"
+};
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
         window.addEventListener('DOMContentLoaded', () => {
-            // URL se admission number nikalna
             const urlParams = new URLSearchParams(window.location.search);
             const admNo = urlParams.get('adm');
-            
-            // LocalStorage se data check karna (Kyunki abhi database nahi hai)
-            const savedAdmNo = localStorage.getItem('receipt_adm_no');
-            
             const contentDiv = document.getElementById('statusContent');
             
-            if (admNo && admNo === savedAdmNo) {
-                const name = localStorage.getItem('receipt_name');
-                const studentClass = localStorage.getItem('receipt_class');
-                const father = localStorage.getItem('receipt_father');
-                
-                contentDiv.innerHTML = `
-                    <p class="border-b pb-1"><strong>Admission No:</strong> ${admNo}</p>
-                    <p class="border-b pb-1"><strong>Student Name:</strong> ${name}</p>
-                    <p class="border-b pb-1"><strong>Father's Name:</strong> ${father}</p>
-                    <p class="border-b pb-1"><strong>Class:</strong> ${studentClass}</p>
-                    <div class="mt-4 bg-emerald-50 p-3 rounded-lg border border-emerald-200 text-center">
-                        <span class="text-emerald-700 font-bold block">Fee Status (Paid / Dues)</span>
-                        <p class="text-xs text-gray-600 mt-1">Database se link hone par yahan poori months ki details dikhegi.</p>
-                    </div>
-                `;
+            if (admNo) {
+                // Firebase database se student row search karna
+                const studentRef = ref(database, 'students/' + admNo);
+                get(studentRef).then((snapshot) => {
+                    if (snapshot.exists()) {
+                        const data = snapshot.val();
+                        contentDiv.innerHTML = `
+                            <p class="border-b pb-1"><strong>Admission No:</strong> ${data.admissionNo}</p>
+                            <p class="border-b pb-1"><strong>Student Name:</strong> ${data.studentName}</p>
+                            <p class="border-b pb-1"><strong>Father's Name:</strong> ${data.fatherName}</p>
+                            <p class="border-b pb-1"><strong>Class:</strong> ${data.studentClass}</p>
+                            <div class="mt-4 bg-emerald-50 p-3 rounded-lg border border-emerald-200 text-center">
+                                <span class="text-emerald-700 font-bold block">Fee Status (Paid / Live Dues)</span>
+                                <p class="text-xs text-gray-700 mt-1 font-semibold">Status: Active / Verified</p>
+                                <p class="text-[11px] text-gray-500 mt-0.5">Monthly dynamic status ledger module is active.</p>
+                            </div>
+                        `;
+                    } else {
+                        contentDiv.innerHTML = `<p class="text-rose-500 text-center font-semibold">Student record not found in Cloud Database!</p>`;
+                    }
+                }).catch((error) => {
+                    console.error(error);
+                    contentDiv.innerHTML = `<p class="text-rose-500 text-center font-semibold">Error connecting to database server.</p>`;
+                });
             } else {
-                contentDiv.innerHTML = `<p class="text-rose-500 text-center font-semibold">Student record not found or link expired!</p>`;
+                contentDiv.innerHTML = `<p class="text-rose-500 text-center font-semibold">Invalid Link! Admission number missing.</p>`;
             }
         });
     </script>

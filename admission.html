@@ -12,7 +12,6 @@
     <style>
         body { font-family: 'Inter', sans-serif; }
         
-        /* Compact Arabic Font configuration for Header */
         .font-arabic-header {
             font-family: 'Amiri', 'Segoe UI', Tahoma, Arial, sans-serif;
             font-weight: 700;
@@ -21,7 +20,6 @@
             direction: rtl;
         }
 
-        /* General Urdu/Arabic Labels Font */
         .font-urdu { 
             font-family: 'Amiri', serif; 
             font-weight: 700;
@@ -32,7 +30,6 @@
         .custom-scrollbar::-webkit-scrollbar-track { background: #0c1a30; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
 
-        /* Form row structure: Label Left | Input Box | Label Right */
         .form-row-item {
             display: flex;
             align-items: center;
@@ -69,68 +66,24 @@
             background-color: #ffffff;
         }
 
-        /* Strict A4 Single Page Print Media Queries */
         @media print {
-            aside, .no-print {
-                display: none !important;
-            }
-            body {
-                background: white !important;
-                color: black !important;
-                padding: 0 !important;
-                margin: 0 !important;
-            }
-            main {
-                padding: 0 !important;
-                margin: 0 !important;
-                width: 100% !important;
-                height: auto !important;
-                overflow: visible !important;
-            }
-            .print-compact {
-                padding: 2px 4px !important;
-                margin-bottom: 2px !important;
-                border-radius: 2px !important;
-                border: 1px solid #cbd5e1 !important;
-                box-shadow: none !important;
-                background: white !important;
-            }
-            .print-grid {
-                gap: 2px !important;
-            }
-            .center-input {
-                background: transparent !important;
-                border: 1px solid #9ca3af !important;
-                border-radius: 2px !important;
-                padding: 0.5px 3px !important;
-                font-size: 8px !important;
-                height: 16px !important;
-            }
-            .eng-label {
-                min-width: 75px !important;
-                font-size: 8px !important;
-            }
-            .urdu-label {
-                min-width: 45px !important;
-                font-size: 11px !important;
-            }
-            header {
-                padding: 4px 8px !important;
-                margin-bottom: 4px !important;
-            }
-            .font-arabic-header {
-                font-size: 1.85rem !important;
-            }
-            @page {
-                size: A4;
-                margin: 3mm 4mm;
-            }
+            aside, .no-print { display: none !important; }
+            body { background: white !important; color: black !important; padding: 0 !important; margin: 0 !important; }
+            main { padding: 0 !important; margin: 0 !important; width: 100% !important; height: auto !important; overflow: visible !important; }
+            .print-compact { padding: 2px 4px !important; margin-bottom: 2px !important; border-radius: 2px !important; border: 1px solid #cbd5e1 !important; box-shadow: none !important; background: white !important; }
+            .print-grid { gap: 2px !important; }
+            .center-input { background: transparent !important; border: 1px solid #9ca3af !important; border-radius: 2px !important; padding: 0.5px 3px !important; font-size: 8px !important; height: 16px !important; }
+            .eng-label { min-width: 75px !important; font-size: 8px !important; }
+            .urdu-label { min-width: 45px !important; font-size: 11px !important; }
+            header { padding: 4px 8px !important; margin-bottom: 4px !important; }
+            .font-arabic-header { font-size: 1.85rem !important; }
+            @page { size: A4; margin: 3mm 4mm; }
         }
     </style>
 </head>
 <body class="bg-[#f4f6f9] text-gray-800 flex min-h-screen overflow-x-hidden">
 
-    <!-- SIDE NAVIGATION (LEFT PANEL - NO PRINT) -->
+    <!-- SIDE NAVIGATION -->
     <aside class="w-72 bg-[#0c1a30] text-slate-300 flex flex-col justify-between shadow-2xl z-20 flex-shrink-0 sticky top-0 h-screen">
         <div class="p-4 border-b border-slate-800 flex flex-col items-center bg-[#0a1628]">
             <div class="w-14 h-14 bg-amber-500 rounded-full flex items-center justify-center mb-1 shadow-inner border-2 border-slate-700">
@@ -173,10 +126,7 @@
 
     <!-- MAIN FORM AREA -->
     <main class="flex-grow flex flex-col min-w-0 overflow-y-auto h-screen p-3 space-y-2">
-        
-        <!-- HEADER STRUCTURE -->
         <header class="bg-white rounded-xl shadow-sm border border-gray-100 p-3 flex items-center justify-between gap-4 print-compact relative">
-            <!-- MADRASA OFFICIAL LOGO -->
             <div class="w-16 h-16 md:w-20 md:h-20 rounded-full border border-gray-100 flex items-center justify-center p-0.5 shadow-sm flex-shrink-0">
                 <img src="logo.png" alt="Madrasa Logo" class="w-full h-full object-contain rounded-full" onerror="this.onerror=null; this.src='https://i.ibb.co/68X6X8Z/temp-logo.png';">
             </div>
@@ -184,10 +134,7 @@
             <div class="text-center flex-grow">
                 <h1 class="font-arabic-header text-[#0c1a30] mb-0.5">مَدْرَسَہ عَرَبِیَہ ضِیَاءُ الْعُلُومْ</h1>
                 <p class="font-urdu text-[11px] text-gray-600 font-bold tracking-wide">چھاونی پڈرونہ، کشی نگر (یو۔پی۔)</p>
-                
                 <hr class="w-2/3 mx-auto my-0.5 border-gray-100">
-
-                <!-- English Section -->
                 <h2 class="text-sm font-extrabold text-blue-900 tracking-wider uppercase leading-none">Madrasa Arabia Ziyaul Uloom</h2>
                 <p class="text-[9px] text-gray-500 font-semibold tracking-wide mt-0.5">Chhawani Padrauna, Kushinagar (U.P.)</p>
                 
@@ -203,7 +150,6 @@
                 </div>
             </div>
             
-            <!-- STUDENT PHOTO -->
             <div class="flex-shrink-0">
                 <div class="w-16 h-20 md:w-20 md:h-24 border border-dashed border-gray-300 rounded-lg bg-slate-50 flex flex-col items-center justify-center p-0.5 relative overflow-hidden">
                     <img id="photoPreview" class="w-full h-full object-cover hidden rounded-md" />
@@ -217,14 +163,12 @@
             </div>
         </header>
 
-        <!-- SUBMIT FORM -->
         <form id="admissionForm" onsubmit="handleAdmissionSubmit(event)" class="space-y-1.5">
-
             <!-- 1. STUDENT INFORMATION -->
             <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden print-compact">
                 <div class="bg-emerald-700 text-white px-3 py-0.5 flex justify-between items-center text-[9px] font-bold uppercase tracking-wider">
                     <span>Student Information</span>
-                    <span class="font-urdu text-xs text-white">طالب علم ki معلومات</span>
+                    <span class="font-urdu text-xs text-white">طالب علم کی معلومات</span>
                 </div>
                 <div class="p-2 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-1.5 print-grid">
                     <div class="form-row-item">
@@ -255,14 +199,14 @@
                     <div class="form-row-item">
                         <span class="eng-label">Gender</span>
                         <div class="center-input flex items-center gap-4 py-0">
-                            <label class="flex items-center gap-1 cursor-pointer"><input type="radio" name="gender" required> Male (لڑکا)</label>
-                            <label class="flex items-center gap-1 cursor-pointer"><input type="radio" name="gender"> Female (لड़की)</label>
+                            <label class="flex items-center gap-1 cursor-pointer"><input type="radio" name="gender" value="Male" required> Male (لڑکا)</label>
+                            <label class="flex items-center gap-1 cursor-pointer"><input type="radio" name="gender" value="Female"> Female (لड़की)</label>
                         </div>
                         <span class="urdu-label font-urdu">جنس:</span>
                     </div>
                     <div class="form-row-item">
                         <span class="eng-label">Date of Birth</span>
-                        <input type="date" required class="center-input">
+                        <input type="date" id="dob" required class="center-input">
                         <span class="urdu-label font-urdu">تاریخ پیدائش:</span>
                     </div>
                     <div class="form-row-item md:col-span-2">
@@ -287,7 +231,7 @@
                     </div>
                     <div class="form-row-item">
                         <span class="eng-label">Mother's Name</span>
-                        <input type="text" required placeholder="Mother's Name" class="center-input">
+                        <input type="text" id="motherName" required placeholder="Mother's Name" class="center-input">
                         <span class="urdu-label font-urdu">والدہ کا نام:</span>
                     </div>
                     <div class="form-row-item">
@@ -302,12 +246,12 @@
                     </div>
                     <div class="form-row-item">
                         <span class="eng-label">Father's Occ.</span>
-                        <input type="text" placeholder="Father's Occupation" class="center-input">
+                        <input type="text" id="fatherOcc" placeholder="Father's Occupation" class="center-input">
                         <span class="urdu-label font-urdu">والد کا پیشہ:</span>
                     </div>
                     <div class="form-row-item">
                         <span class="eng-label">Mother's Occ.</span>
-                        <input type="text" placeholder="Mother's Occupation" class="center-input">
+                        <input type="text" id="motherOcc" placeholder="Mother's Occupation" class="center-input">
                         <span class="urdu-label font-urdu">والدہ کا پیشہ:</span>
                     </div>
                 </div>
@@ -342,7 +286,7 @@
                     </div>
                     <div class="form-row-item">
                         <span class="eng-label">School Name</span>
-                        <input type="text" placeholder="Previous School" class="center-input">
+                        <input type="text" id="previousSchool" placeholder="Previous School" class="center-input">
                         <span class="urdu-label font-urdu">اسکول کا نام:</span>
                     </div>
                     <div class="form-row-item md:col-span-2">
@@ -372,7 +316,7 @@
                     </div>
                     <div class="form-row-item md:col-span-2">
                         <span class="eng-label">Gmail Address</span>
-                        <input type="email" placeholder="example@gmail.com" class="center-input">
+                        <input type="email" id="gmailAddress" placeholder="example@gmail.com" class="center-input">
                         <span class="urdu-label font-urdu">جی میل:</span>
                     </div>
                     <div class="form-row-item md:col-span-2">
@@ -383,67 +327,61 @@
                 </div>
             </div>
 
-            <!-- 5. DOCUMENTS SUBMITTED WITH UPLOAD AND TICK OPTION -->
+            <!-- 5. DOCUMENTS SUBMITTED -->
             <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden print-compact">
                 <div class="bg-amber-700 text-white px-3 py-0.5 flex justify-between items-center text-[9px] font-bold uppercase tracking-wider">
                     <span>Documents Submitted (Tick & Upload)</span>
-                    <span class="font-urdu text-xs text-white">جمع شدہ دستاویزات (نشان لگائیں اور فائل اپلوڈ کریں)</span>
+                    <span class="font-urdu text-xs text-white">جمع شدہ دستاویزات</span>
                 </div>
                 <div class="p-1.5 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 print-grid">
-                    <!-- Aadhaar -->
                     <div class="bg-slate-50 p-1 md:p-1.5 rounded border border-gray-200 flex flex-col justify-between gap-1 shadow-sm">
                         <label class="flex items-center gap-1 cursor-pointer text-[8px] md:text-[8.5px] font-semibold text-gray-700">
-                            <input type="checkbox" class="w-3 h-3 md:w-3.5 md:h-3.5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> 
+                            <input type="checkbox" id="check_aadhaar" class="w-3 h-3 md:w-3.5 md:h-3.5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> 
                             <span>Aadhaar</span>
                         </label>
                         <input type="file" class="hidden" id="file_aadhaar">
                         <button type="button" onclick="document.getElementById('file_aadhaar').click()" class="no-print bg-blue-50 hover:bg-blue-100 text-[#0c1a30] text-[8px] font-bold py-0.5 px-1 rounded border border-blue-200 text-center transition-colors">📁 Upload</button>
                     </div>
 
-                    <!-- T.C. -->
                     <div class="bg-slate-50 p-1 md:p-1.5 rounded border border-gray-200 flex flex-col justify-between gap-1 shadow-sm">
                         <label class="flex items-center gap-1 cursor-pointer text-[8px] md:text-[8.5px] font-semibold text-gray-700">
-                            <input type="checkbox" class="w-3 h-3 md:w-3.5 md:h-3.5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> 
+                            <input type="checkbox" id="check_tc" class="w-3 h-3 md:w-3.5 md:h-3.5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> 
                             <span>T.C. (ٹی سی)</span>
                         </label>
                         <input type="file" class="hidden" id="file_tc">
                         <button type="button" onclick="document.getElementById('file_tc').click()" class="no-print bg-blue-50 hover:bg-blue-100 text-[#0c1a30] text-[8px] font-bold py-0.5 px-1 rounded border border-blue-200 text-center transition-colors">📁 Upload</button>
                     </div>
 
-                    <!-- Marksheet -->
                     <div class="bg-slate-50 p-1 md:p-1.5 rounded border border-gray-200 flex flex-col justify-between gap-1 shadow-sm">
                         <label class="flex items-center gap-1 cursor-pointer text-[8px] md:text-[8.5px] font-semibold text-gray-700">
-                            <input type="checkbox" class="w-3 h-3 md:w-3.5 md:h-3.5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> 
+                            <input type="checkbox" id="check_marksheet" class="w-3 h-3 md:w-3.5 md:h-3.5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> 
                             <span>Marksheet</span>
                         </label>
                         <input type="file" class="hidden" id="file_marksheet">
                         <button type="button" onclick="document.getElementById('file_marksheet').click()" class="no-print bg-blue-50 hover:bg-blue-100 text-[#0c1a30] text-[8px] font-bold py-0.5 px-1 rounded border border-blue-200 text-center transition-colors">📁 Upload</button>
                     </div>
 
-                    <!-- Birth Cert. -->
                     <div class="bg-slate-50 p-1 md:p-1.5 rounded border border-gray-200 flex flex-col justify-between gap-1 shadow-sm">
                         <label class="flex items-center gap-1 cursor-pointer text-[8px] md:text-[8.5px] font-semibold text-gray-700">
-                            <input type="checkbox" class="w-3 h-3 md:w-3.5 md:h-3.5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> 
+                            <input type="checkbox" id="check_birth" class="w-3 h-3 md:w-3.5 md:h-3.5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> 
                             <span>Birth Cert.</span>
                         </label>
                         <input type="file" class="hidden" id="file_birth">
                         <button type="button" onclick="document.getElementById('file_birth').click()" class="no-print bg-blue-50 hover:bg-blue-100 text-[#0c1a30] text-[8px] font-bold py-0.5 px-1 rounded border border-blue-200 text-center transition-colors">📁 Upload</button>
                     </div>
 
-                    <!-- Address Proof -->
                     <div class="bg-slate-50 p-1 md:p-1.5 rounded border border-gray-200 flex flex-col justify-between gap-1 shadow-sm">
                         <label class="flex items-center gap-1 cursor-pointer text-[8px] md:text-[8.5px] font-semibold text-gray-700">
-                            <input type="checkbox" class="w-3 h-3 md:w-3.5 md:h-3.5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> 
+                            <input type="checkbox" id="check_address" class="w-3 h-3 md:w-3.5 md:h-3.5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> 
                             <span>Address Proof</span>
                         </label>
                         <input type="file" class="hidden" id="file_address">
                         <button type="button" onclick="document.getElementById('file_address').click()" class="no-print bg-blue-50 hover:bg-blue-100 text-[#0c1a30] text-[8px] font-bold py-0.5 px-1 rounded border border-blue-200 text-center transition-colors">📁 Upload</button>
                     </div>
 
-                    <!-- Photos -->
                     <div class="bg-slate-50 p-1 md:p-1.5 rounded border border-gray-200 flex flex-col justify-between gap-1 shadow-sm">
                         <label class="flex items-center gap-1 cursor-pointer text-[8px] md:text-[8.5px] font-semibold text-gray-700">
-                            <input type="checkbox" class="w-3 h-3 md:w-3.5 md:h-3.5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> 
+                            <input type="checkbox" id="check_photos" class="w-3 h-3 md:w-3.5 md:h-3.5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> 
                             <span>Photos (02)</span>
                         </label>
                         <input type="file" class="hidden" id="file_photos">
@@ -452,7 +390,7 @@
                 </div>
             </div>
 
-            <!-- 6. DECLARATION (WITH TICK OPTION) -->
+            <!-- 6. DECLARATION -->
             <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-2.5 space-y-1.5 print-compact">
                 <div class="text-right font-urdu text-xs md:text-sm text-gray-700 leading-normal font-semibold">
                     میں / ہم اس بات کا اقرار کرتے ہیں کہ فارم میں درج تمام معلومات بالکل درست ہیں۔ اگر کوئی بھی معلومات غلط یا ادھوری پائی گئی تو مدرسہ انتظامیہ کا فیصلہ حتمی ہوگا اور ہمیں قبول ہوگا۔
@@ -460,8 +398,6 @@
                 <div class="text-[8.5px] text-gray-500 italic leading-tight">
                     I/We hereby solemnly declare that all the information provided in this admission form is true, complete and correct. I agree to fully abide by all the rules and regulations of the Madrasa.
                 </div>
-                
-                <!-- Interactive Tick / Agreement Option inside Declaration Box -->
                 <div class="border-t pt-1.5 flex items-center justify-between no-print">
                     <label class="flex items-center gap-2 cursor-pointer bg-blue-50/50 py-1 px-2.5 rounded-lg border border-blue-100 hover:bg-blue-50 transition-all select-none">
                         <input type="checkbox" required class="w-3.5 h-3.5 rounded text-blue-600 focus:ring-blue-500 border-gray-300">
@@ -478,29 +414,142 @@
                 <div class="bg-white border rounded p-1.5 relative"><div class="border-b border-dashed border-gray-300 pt-2 mb-1"></div>Principal Signature <span class="font-urdu text-gray-400 block text-[9px]">پرنسپل کے دستخط</span></div>
             </div>
 
-            <!-- FORM ACTIONS (NO PRINT) -->
+            <!-- FORM ACTIONS -->
             <div class="flex items-center justify-end gap-2 pt-2 border-t border-gray-200 no-print">
                 <button type="reset" class="bg-white border text-gray-700 font-bold text-xs px-3 py-1.5 rounded-xl hover:bg-gray-50">Clear</button>
                 <button type="submit" class="bg-blue-600 text-white font-bold text-xs px-4 py-1.5 rounded-xl hover:bg-blue-700 shadow-md">💾 Save Student</button>
                 <button type="button" onclick="window.print()" class="bg-emerald-600 text-white font-bold text-xs px-4 py-1.5 rounded-xl hover:bg-emerald-700 shadow-md">🖨️ Print Form</button>
             </div>
-
         </form>
     </main>
 
-    <script>
+    <!-- FIREBASE MODULE INTEGRATION -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        // FIXME: Apne Firebase Console se mili config details yahan daalein
+        const firebaseConfig = {
+  apiKey: "AIzaSyCGgsuCGuuGXJ4JZW_bb202XJy532PXVMA",
+  authDomain: "ziyaululoom-portal.firebaseapp.com",
+  databaseURL: "https://ziyaululoom-portal-default-rtdb.firebaseio.com",
+  projectId: "ziyaululoom-portal",
+  storageBucket: "ziyaululoom-portal.firebasestorage.app",
+  messagingSenderId: "1097092919331",
+  appId: "1:1097092919331:web:83aaed1facef7565610196"
+};
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
         window.addEventListener('DOMContentLoaded', () => {
             document.getElementById('topAdmissionDate').value = new Date().toISOString().split('T')[0];
             
-            // Strictly check and allow only numeric input dynamically
             const numericInputs = document.querySelectorAll('.only-numbers');
             numericInputs.forEach(input => {
-                input.addEventListener('input', function(e) {
+                input.addEventListener('input', function() {
                     this.value = this.value.replace(/[^0-9]/g, '');
                 });
             });
         });
 
+        // Expose function globally for form onsubmit
+        window.handleAdmissionSubmit = function(event) {
+            event.preventDefault();
+            
+            const admissionNo = document.getElementById('topAdmissionNo').value;
+            const admissionDate = document.getElementById('topAdmissionDate').value;
+            const studentName = document.getElementById('studentName').value;
+            const studentClass = document.getElementById('studentClass').value;
+            const gender = document.querySelector('input[name="gender"]:checked')?.value || "";
+            const dob = document.getElementById('dob').value;
+            const studentAadhaar = document.getElementById('studentAadhaar').value;
+            
+            const fatherName = document.getElementById('fatherName').value;
+            const motherName = document.getElementById('motherName').value;
+            const fatherAadhaar = document.getElementById('fatherAadhaar').value;
+            const motherAadhaar = document.getElementById('motherAadhaar').value;
+            const fatherOcc = document.getElementById('fatherOcc').value;
+            const motherOcc = document.getElementById('motherOcc').value;
+            
+            const previousClass = document.getElementById('previousClass').value;
+            const previousSchool = document.getElementById('previousSchool').value;
+            const penNumber = document.getElementById('penNumber').value;
+            
+            const mobile1 = document.getElementById('mobile1').value;
+            const mobile2 = document.getElementById('mobile2').value;
+            const gmailAddress = document.getElementById('gmailAddress').value;
+            const address = document.getElementById('fullAddress').value;
+
+            // Basic Validation Checks
+            if (studentAadhaar && studentAadhaar.length !== 12) { alert("Student Aadhaar 12 digits ka hona chahiye!"); return; }
+            if (fatherAadhaar && fatherAadhaar.length !== 12) { alert("Father Aadhaar 12 digits ka hona chahiye!"); return; }
+            if (mobile1.length !== 10) { alert("Mobile No. 1 strictly 10 digits ka hona chahiye!"); return; }
+
+            // Documents Checked status
+            const docs = {
+                aadhaar: document.getElementById('check_aadhaar').checked,
+                tc: document.getElementById('check_tc').checked,
+                marksheet: document.getElementById('check_marksheet').checked,
+                birth: document.getElementById('check_birth').checked,
+                address: document.getElementById('check_address').checked,
+                photos: document.getElementById('check_photos').checked
+            };
+
+            // Firebase cloud Database me data push karna
+            set(ref(database, 'students/' + admissionNo), {
+                admissionNo: admissionNo,
+                admissionDate: admissionDate,
+                studentName: studentName,
+                studentClass: studentClass,
+                gender: gender,
+                dob: dob,
+                studentAadhaar: studentAadhaar,
+                fatherName: fatherName,
+                motherName: motherName,
+                fatherAadhaar: fatherAadhaar,
+                motherAadhaar: motherAadhaar,
+                fatherOcc: fatherOcc,
+                motherOcc: motherOcc,
+                previousClass: previousClass,
+                previousSchool: previousSchool,
+                penNumber: penNumber,
+                mobile1: mobile1,
+                mobile2: mobile2,
+                gmailAddress: gmailAddress,
+                address: address,
+                documents: docs,
+                feeStatus: {
+                    details: "All months updated live via database dashboard"
+                }
+            })
+            .then(() => {
+                // Local Storage updates (Fallback)
+                localStorage.setItem('receipt_adm_no', admissionNo);
+                localStorage.setItem('receipt_date', admissionDate);
+                localStorage.setItem('receipt_name', studentName);
+                localStorage.setItem('receipt_class', studentClass);
+                localStorage.setItem('receipt_father', fatherName);
+                localStorage.setItem('receipt_address', address);
+
+                sendWhatsAppNotification(mobile1, studentName, admissionNo);
+                alert("Student Data saved successfully to Firebase Cloud! Opening WhatsApp notification...");
+                window.location.href = "fee_receipt.html";
+            })
+            .catch((error) => {
+                console.error("Firebase Error: ", error);
+                alert("Database me data save nahi ho paya! Kripya settings check karein.");
+            });
+        };
+
+        function sendWhatsAppNotification(parentMobile, studentName, admissionNo) {
+            const statusLink = `https://maqboolahmadnoori-eng.github.io/ziyaululoom/status.html?adm=${admissionNo}`;
+            const message = `Assalamu Alaikum,\n\n*Madrasa Arabia Ziyaul Uloom*\n\nStudent *${studentName}* ka admission successfully ho gaya hai.\n\nFee Receipt aur Monthly Fee Status dekhne ke liye neeche diye gaye link par click karein:\n👉 ${statusLink}`;
+            window.open(`https://wa.me/91${parentMobile}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+    </script>
+    <script>
+        // Photo preview standalone plain script
         function previewStudentPhoto(event) {
             const file = event.target.files[0];
             if (file) {
@@ -514,79 +563,6 @@
                 }
                 reader.readAsDataURL(file);
             }
-        }
-
-        function handleAdmissionSubmit(event) {
-            event.preventDefault();
-            
-            const studentAadhaar = document.getElementById('studentAadhaar').value;
-            const fatherAadhaar = document.getElementById('fatherAadhaar').value;
-            const motherAadhaar = document.getElementById('motherAadhaar').value;
-            const mobile1 = document.getElementById('mobile1').value;
-            const mobile2 = document.getElementById('mobile2').value;
-
-            // Strict Aadhaar length checks if provided
-            if (studentAadhaar && studentAadhaar.length !== 12) {
-                alert("Student Aadhaar Number strictly 12 digits ka hona chahiye!");
-                return;
-            }
-            if (fatherAadhaar && fatherAadhaar.length !== 12) {
-                alert("Father Aadhaar Number strictly 12 digits ka hona chahiye!");
-                return;
-            }
-            if (motherAadhaar && motherAadhaar.length !== 12) {
-                alert("Mother Aadhaar Number strictly 12 digits ka hona chahiye!");
-                return;
-            }
-
-            if (mobile1.length !== 10) {
-                alert("Mobile No. 1 strictly 10 digits ka hona chahiye!");
-                return;
-            }
-            if (mobile2 && mobile2.length !== 10) {
-                alert("Mobile No. 2 strictly 10 digits ka hona chahiye!");
-                return;
-            }
-            
-            // Form values extract karna
-            const admissionNo = document.getElementById('topAdmissionNo').value;
-            const admissionDate = document.getElementById('topAdmissionDate').value;
-            const studentName = document.getElementById('studentName').value;
-            const studentClass = document.getElementById('studentClass').value;
-            const fatherName = document.getElementById('fatherName').value;
-            const address = document.getElementById('fullAddress').value;
-
-            // Local Storage me save karna taki Fee Receipt access kar sake
-            localStorage.setItem('receipt_adm_no', admissionNo);
-            localStorage.setItem('receipt_date', admissionDate);
-            localStorage.setItem('receipt_name', studentName);
-            localStorage.setItem('receipt_class', studentClass);
-            localStorage.setItem('receipt_father', fatherName);
-            localStorage.setItem('receipt_address', address);
-
-            // Trigger WhatsApp Web Integration Function
-            sendWhatsAppNotification(mobile1, studentName, admissionNo);
-
-            alert("Student Data saved successfully! WhatsApp notification screen open ho rahi hai aur ab automatically Fee Receipt khulegi.");
-            
-            // Redirecting to fee receipt structure page
-            window.location.href = "fee_receipt.html";
-        }
-
-        // WhatsApp trigger integration
-        // WhatsApp trigger integration
-        function sendWhatsAppNotification(parentMobile, studentName, admissionNo) {
-            // Aapka actual free live link
-            const statusLink = `https://maqboolahmadnoori-eng.github.io/ziyaululoom/status.html?adm=${admissionNo}`;
-            
-            // Clear structure dynamic Urdu/English message layout
-            const message = `Assalamu Alaikum,\n\n*Madrasa Arabia Ziyaul Uloom*\n\nStudent *${studentName}* ka admission successfully ho gaya hai.\n\nFee Receipt aur Monthly Fee Status (Kitna jama hai / kitna baqi hai) dekhne ke liye neeche diye gaye link par click karein:\n👉 ${statusLink}`;
-            
-            const encodedMessage = encodeURIComponent(message);
-            const whatsappURL = `https://wa.me/91${parentMobile}?text=${encodedMessage}`;
-            
-            // Open WhatsApp web or App dynamically in a new tab
-            window.open(whatsappURL, '_blank');
         }
     </script>
 </body>
