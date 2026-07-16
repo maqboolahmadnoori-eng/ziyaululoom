@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madrasa Arabia Ziyaul Uloom - Admission Form</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Arabic (Amiri) & English (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Compact Arabic Font configuration for Header */
+        .font-arabic-header {
+            font-family: 'Amiri', 'Segoe UI', Tahoma, Arial, sans-serif;
+            font-weight: 700;
+            font-size: 2.35rem; 
+            line-height: 1.1;
+            direction: rtl;
+        }
+
+        /* General Urdu/Arabic Labels Font */
+        .font-urdu { 
+            font-family: 'Amiri', serif; 
+            font-weight: 700;
+            line-height: 1.8; 
+        }
+
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #0c1a30; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+
+        /* Form row structure: Label Left | Input Box | Label Right */
+        .form-row-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            width: 100%;
+        }
+        .eng-label {
+            min-width: 85px;
+            font-size: 9px;
+            font-weight: 600;
+            color: #374151;
+            text-align: left;
+        }
+        .urdu-label {
+            min-width: 55px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #3b4252;
+            text-align: right;
+            direction: rtl;
+        }
+        .center-input {
+            flex-grow: 1;
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-size: 9px;
+            outline: none;
+            transition: border-color 0.15s ease;
+        }
+        .center-input:focus {
+            border-color: #3b82f6;
+            background-color: #ffffff;
+        }
+
+        /* Strict A4 Single Page Print Media Queries */
+        @media print {
+            aside, .no-print {
+                display: none !important;
+            }
+            body {
+                background: white !important;
+                color: black !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            main {
+                padding: 0 !important;
+                margin: 0 !important;
+                width: 100% !important;
+                height: auto !important;
+                overflow: visible !important;
+            }
+            .print-compact {
+                padding: 2px 4px !important;
+                margin-bottom: 2px !important;
+                border-radius: 2px !important;
+                border: 1px solid #cbd5e1 !important;
+                box-shadow: none !important;
+                background: white !important;
+            }
+            .print-grid {
+                gap: 2px !important;
+            }
+            .center-input {
+                background: transparent !important;
+                border: 1px solid #9ca3af !important;
+                border-radius: 2px !important;
+                padding: 0.5px 3px !important;
+                font-size: 8px !important;
+                height: 16px !important;
+            }
+            .eng-label {
+                min-width: 75px !important;
+                font-size: 8px !important;
+            }
+            .urdu-label {
+                min-width: 45px !important;
+                font-size: 11px !important;
+            }
+            header {
+                padding: 4px 8px !important;
+                margin-bottom: 4px !important;
+            }
+            .font-arabic-header {
+                font-size: 1.85rem !important;
+            }
+            @page {
+                size: A4;
+                margin: 3mm 4mm;
+            }
+        }
+    </style>
+</head>
+<body class="bg-[#f4f6f9] text-gray-800 flex min-h-screen overflow-x-hidden">
+
+    <!-- SIDE NAVIGATION (LEFT PANEL - NO PRINT) -->
+    <aside class="w-72 bg-[#0c1a30] text-slate-300 flex flex-col justify-between shadow-2xl z-20 flex-shrink-0 sticky top-0 h-screen">
+        <div class="p-4 border-b border-slate-800 flex flex-col items-center bg-[#0a1628]">
+            <div class="w-14 h-14 bg-amber-500 rounded-full flex items-center justify-center mb-1 shadow-inner border-2 border-slate-700">
+                <span class="text-white font-bold text-lg">MAZU</span>
+            </div>
+            <h2 class="text-xs font-bold text-white tracking-wider text-center uppercase">MAIN MODULES</h2>
+            <p class="font-urdu text-xs text-amber-500 mt-0.5">اہم ماڈیولز</p>
+        </div>
+
+        <nav class="flex-grow p-3 space-y-1 overflow-y-auto custom-scrollbar text-xs">
+            <a href="index.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-800 rounded-xl transition-colors hover:text-white">
+                <div class="flex items-center gap-3"><span>📊</span><span>Dashboard</span></div>
+                <span class="font-urdu text-xs text-gray-400">ڈیش بورڈ</span>
+            </a>
+            <a href="student_management.html" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-800 rounded-xl transition-colors hover:text-white">
+                <div class="flex items-center gap-3"><span>👨‍🎓</span><span>Student Management</span></div>
+                <span class="font-urdu text-xs text-gray-400">طالب علم</span>
+            </a>
+            <a href="admission.html" class="flex items-center justify-between px-4 py-2.5 bg-blue-600 text-white rounded-xl font-semibold transition-all shadow-md shadow-blue-900/30">
+                <div class="flex items-center gap-3"><span>📝</span><span>Admission</span></div>
+                <span class="font-urdu text-xs opacity-90">داخلہ</span>
+            </a>
+            <a href="#" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-800 rounded-xl transition-colors hover:text-white">
+                <div class="flex items-center gap-3"><span>💵</span><span>Fees Management</span></div>
+                <span class="font-urdu text-xs text-gray-400">فیس ▾</span>
+            </a>
+            <a href="#" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-800 rounded-xl transition-colors hover:text-white">
+                <div class="flex items-center gap-3"><span>📅</span><span>Attendance</span></div>
+                <span class="font-urdu text-xs text-gray-400">حاضری ▾</span>
+            </a>
+        </nav>
+
+        <div class="p-3 border-t border-slate-800 bg-[#0a1628]">
+            <a href="#" class="flex items-center justify-between px-4 py-2 bg-rose-950/40 text-rose-400 hover:bg-rose-900/40 rounded-lg transition-colors">
+                <div class="flex items-center gap-3 font-semibold"><span>🚪</span><span>Logout</span></div>
+                <span class="font-urdu text-xs">خروج</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- MAIN FORM AREA -->
+    <main class="flex-grow flex flex-col min-w-0 overflow-y-auto h-screen p-3 space-y-2">
+        
+        <!-- HEADER STRUCTURE -->
+        <header class="bg-white rounded-xl shadow-sm border border-gray-100 p-3 flex items-center justify-between gap-4 print-compact relative">
+            <!-- MADRASA OFFICIAL LOGO -->
+            <div class="w-16 h-16 md:w-20 md:h-20 rounded-full border border-gray-100 flex items-center justify-center p-0.5 shadow-sm flex-shrink-0">
+                <img src="logo.png" alt="Madrasa Logo" class="w-full h-full object-contain rounded-full" onerror="this.onerror=null; this.src='https://i.ibb.co/68X6X8Z/temp-logo.png';">
+            </div>
+
+            <div class="text-center flex-grow">
+                <h1 class="font-arabic-header text-[#0c1a30] mb-0.5">مَدْرَسَہ عَرَبِیَہ ضِیَاءُ الْعُلُومْ</h1>
+                <p class="font-urdu text-[11px] text-gray-600 font-bold tracking-wide">چھاونی پڈرونہ، کشی نگر (یو۔پی۔)</p>
+                
+                <hr class="w-2/3 mx-auto my-0.5 border-gray-100">
+
+                <!-- English Section -->
+                <h2 class="text-sm font-extrabold text-blue-900 tracking-wider uppercase leading-none">Madrasa Arabia Ziyaul Uloom</h2>
+                <p class="text-[9px] text-gray-500 font-semibold tracking-wide mt-0.5">Chhawani Padrauna, Kushinagar (U.P.)</p>
+                
+                <div class="mt-2 border-t pt-1 flex justify-between px-4 text-[9px] font-bold text-gray-600">
+                    <div>
+                        <span class="text-gray-400">Adm No / داخلہ نمبر:</span>
+                        <input type="text" id="topAdmissionNo" inputmode="numeric" value="1026" class="w-10 text-left text-blue-600 font-bold border-b border-gray-300 outline-none print-input bg-transparent only-numbers">
+                    </div>
+                    <div>
+                        <span class="text-gray-400">Date / تاریخ:</span>
+                        <input type="date" id="topAdmissionDate" class="w-22 text-right border-b border-gray-300 outline-none print-input bg-transparent">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- STUDENT PHOTO -->
+            <div class="flex-shrink-0">
+                <div class="w-16 h-20 md:w-20 md:h-24 border border-dashed border-gray-300 rounded-lg bg-slate-50 flex flex-col items-center justify-center p-0.5 relative overflow-hidden">
+                    <img id="photoPreview" class="w-full h-full object-cover hidden rounded-md" />
+                    <div id="photoPlaceholder" class="text-center">
+                        <span class="text-lg text-gray-400">👤</span>
+                        <p class="text-[8px] text-gray-400 font-bold leading-none mt-1">Photo</p>
+                        <p class="font-urdu text-[10px] text-gray-400 leading-none">تصویر</p>
+                    </div>
+                    <input type="file" id="topPhotoInput" accept="image/*" onchange="previewStudentPhoto(event)" class="absolute inset-0 opacity-0 cursor-pointer no-print">
+                </div>
+            </div>
+        </header>
+
+        <!-- SUBMIT FORM -->
+        <form id="admissionForm" onsubmit="handleAdmissionSubmit(event)" class="space-y-1.5">
+
+            <!-- 1. STUDENT INFORMATION -->
+            <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden print-compact">
+                <div class="bg-emerald-700 text-white px-3 py-0.5 flex justify-between items-center text-[9px] font-bold uppercase tracking-wider">
+                    <span>Student Information</span>
+                    <span class="font-urdu text-xs text-white">طالب علم ki معلومات</span>
+                </div>
+                <div class="p-2 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-1.5 print-grid">
+                    <div class="form-row-item">
+                        <span class="eng-label">Student Name</span>
+                        <input type="text" id="studentName" required placeholder="Full Name" class="center-input">
+                        <span class="urdu-label font-urdu">نام:</span>
+                    </div>
+                    <div class="form-row-item">
+                        <span class="eng-label">Class</span>
+                        <select id="studentClass" required class="center-input font-semibold">
+                            <option value="">Select Class / درجہ منتخب کریں</option>
+                            <option value="Nursery">Nursery (نرسری)</option>
+                            <option value="LKG">LKG (ایل۔کے۔جی)</option>
+                            <option value="UKG">UKG (یو۔کے۔جی)</option>
+                            <option value="1st Class">1st Class (پہلی جماعت)</option>
+                            <option value="2nd Class">2nd Class (دوسری جماعت)</option>
+                            <option value="3rd Class">3rd Class (تیسری جماعت)</option>
+                            <option value="4th Class">4th Class (چوتھی جماعت)</option>
+                            <option value="5th Class">5th Class (پانچویں جماعت)</option>
+                            <option value="6th Class">6th Class (چھٹی جماعت)</option>
+                            <option value="7th Class">7th Class (ساتویں جماعت)</option>
+                            <option value="8th Class">8th Class (آٹھویں جماعت)</option>
+                            <option value="9th Class">9th Class (نویں جماعت)</option>
+                            <option value="10th Class">10th Class (دسویں جماعت)</option>
+                        </select>
+                        <span class="urdu-label font-urdu">جماعت:</span>
+                    </div>
+                    <div class="form-row-item">
+                        <span class="eng-label">Gender</span>
+                        <div class="center-input flex items-center gap-4 py-0">
+                            <label class="flex items-center gap-1 cursor-pointer"><input type="radio" name="gender" required> Male (لڑکا)</label>
+                            <label class="flex items-center gap-1 cursor-pointer"><input type="radio" name="gender"> Female (لड़की)</label>
+                        </div>
+                        <span class="urdu-label font-urdu">جنس:</span>
+                    </div>
+                    <div class="form-row-item">
+                        <span class="eng-label">Date of Birth</span>
+                        <input type="date" required class="center-input">
+                        <span class="urdu-label font-urdu">تاریخ پیدائش:</span>
+                    </div>
+                    <div class="form-row-item md:col-span-2">
+                        <span class="eng-label">Aadhaar Number</span>
+                        <input type="text" id="studentAadhaar" maxlength="12" placeholder="12-digit Aadhaar Number" class="center-input only-numbers">
+                        <span class="urdu-label font-urdu">آدھار نمبر:</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. PARENT / GUARDIAN DETAILS -->
+            <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden print-compact">
+                <div class="bg-amber-600 text-white px-3 py-0.5 flex justify-between items-center text-[9px] font-bold uppercase tracking-wider">
+                    <span>Parent / Guardian Details</span>
+                    <span class="font-urdu text-xs text-white">والدین / سرپرست کی معلومات</span>
+                </div>
+                <div class="p-2 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-1.5 print-grid">
+                    <div class="form-row-item">
+                        <span class="eng-label">Father's Name</span>
+                        <input type="text" id="fatherName" required placeholder="Father's Name" class="center-input">
+                        <span class="urdu-label font-urdu">والد کا نام:</span>
+                    </div>
+                    <div class="form-row-item">
+                        <span class="eng-label">Mother's Name</span>
+                        <input type="text" required placeholder="Mother's Name" class="center-input">
+                        <span class="urdu-label font-urdu">والدہ کا نام:</span>
+                    </div>
+                    <div class="form-row-item">
+                        <span class="eng-label">Father Aadhaar</span>
+                        <input type="text" id="fatherAadhaar" maxlength="12" placeholder="12-digit Aadhaar Number" class="center-input only-numbers">
+                        <span class="urdu-label font-urdu">والد آدھار:</span>
+                    </div>
+                    <div class="form-row-item">
+                        <span class="eng-label">Mother Aadhaar</span>
+                        <input type="text" id="motherAadhaar" maxlength="12" placeholder="12-digit Aadhaar Number" class="center-input only-numbers">
+                        <span class="urdu-label font-urdu">والدہ آدھار:</span>
+                    </div>
+                    <div class="form-row-item">
+                        <span class="eng-label">Father's Occ.</span>
+                        <input type="text" placeholder="Father's Occupation" class="center-input">
+                        <span class="urdu-label font-urdu">والد کا پیشہ:</span>
+                    </div>
+                    <div class="form-row-item">
+                        <span class="eng-label">Mother's Occ.</span>
+                        <input type="text" placeholder="Mother's Occupation" class="center-input">
+                        <span class="urdu-label font-urdu">والدہ کا پیشہ:</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. PREVIOUS EDUCATION -->
+            <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden print-compact">
+                <div class="bg-purple-700 text-white px-3 py-0.5 flex justify-between items-center text-[9px] font-bold uppercase tracking-wider">
+                    <span>Previous Education</span>
+                    <span class="font-urdu text-xs text-white">سابقہ تعلیم</span>
+                </div>
+                <div class="p-2 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-1.5 print-grid">
+                    <div class="form-row-item">
+                        <span class="eng-label">Previous Class</span>
+                        <select class="center-input font-semibold" id="previousClass">
+                            <option value="None">None (کوئی نہیں)</option>
+                            <option value="Nursery">Nursery (نرسری)</option>
+                            <option value="LKG">LKG (ایل۔کے۔جی)</option>
+                            <option value="UKG">UKG (یو۔کے۔جی)</option>
+                            <option value="1st Class">1st Class (پہلی جماعت)</option>
+                            <option value="2nd Class">2nd Class (دوسری جماعت)</option>
+                            <option value="3rd Class">3rd Class (تیسری جماعت)</option>
+                            <option value="4th Class">4th Class (چوتھی جماعت)</option>
+                            <option value="5th Class">5th Class (پانچویں جماعت)</option>
+                            <option value="6th Class">6th Class (چھٹی جماعت)</option>
+                            <option value="7th Class">7th Class (ساتویں جماعت)</option>
+                            <option value="8th Class">8th Class (آٹھویں جماعت)</option>
+                            <option value="9th Class">9th Class (نویں جماعت)</option>
+                            <option value="10th Class">10th Class (دسویں جماعت)</option>
+                        </select>
+                        <span class="urdu-label font-urdu">پچھلی جماعت:</span>
+                    </div>
+                    <div class="form-row-item">
+                        <span class="eng-label">School Name</span>
+                        <input type="text" placeholder="Previous School" class="center-input">
+                        <span class="urdu-label font-urdu">اسکول کا نام:</span>
+                    </div>
+                    <div class="form-row-item md:col-span-2">
+                        <span class="eng-label">PEN Number</span>
+                        <input type="text" id="penNumber" inputmode="numeric" placeholder="Permanent Education Number" class="center-input only-numbers">
+                        <span class="urdu-label font-urdu">تعلیمی نمبر (PEN):</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. CONTACT DETAILS & ADDRESS -->
+            <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden print-compact">
+                <div class="bg-[#0e2246] text-white px-3 py-0.5 flex justify-between items-center text-[9px] font-bold uppercase tracking-wider">
+                    <span>Contact & Address Details</span>
+                    <span class="font-urdu text-xs text-white">رابطہ کی معلومات اور پتہ</span>
+                </div>
+                <div class="p-2 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-1.5 print-grid">
+                    <div class="form-row-item">
+                        <span class="eng-label">Mobile No. 1</span>
+                        <input type="tel" id="mobile1" required maxlength="10" pattern="\d{10}" inputmode="numeric" placeholder="Primary Mobile" class="center-input only-numbers">
+                        <span class="urdu-label font-urdu">موبائل ۱:</span>
+                    </div>
+                    <div class="form-row-item">
+                        <span class="eng-label">Mobile No. 2</span>
+                        <input type="tel" id="mobile2" maxlength="10" pattern="\d{10}" inputmode="numeric" placeholder="Alternate Mobile" class="center-input only-numbers">
+                        <span class="urdu-label font-urdu">موبائل ۲:</span>
+                    </div>
+                    <div class="form-row-item md:col-span-2">
+                        <span class="eng-label">Gmail Address</span>
+                        <input type="email" placeholder="example@gmail.com" class="center-input">
+                        <span class="urdu-label font-urdu">جی میل:</span>
+                    </div>
+                    <div class="form-row-item md:col-span-2">
+                        <span class="eng-label">Full Address</span>
+                        <input type="text" id="fullAddress" required placeholder="Full Location details..." class="center-input">
+                        <span class="urdu-label font-urdu">مستقل پتہ:</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. DOCUMENTS SUBMITTED WITH UPLOAD AND TICK OPTION -->
+            <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden print-compact">
+                <div class="bg-amber-700 text-white px-3 py-0.5 flex justify-between items-center text-[9px] font-bold uppercase tracking-wider">
+                    <span>Documents Submitted (Tick & Upload)</span>
+                    <span class="font-urdu text-xs text-white">جمع شدہ دستاویزات (نشان لگائیں اور فائل اپلوڈ کریں)</span>
+                </div>
+                <div class="p-1.5 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 print-grid">
+                    <!-- Aadhaar -->
+                    <div class="bg-slate-50 p-1 md:p-1.5 rounded border border-gray-200 flex flex-col justify-between gap-1 shadow-sm">
+                        <label class="flex items-center gap-1 cursor-pointer text-[8px] md:text-[8.5px] font-semibold text-gray-700">
+                            <input type="checkbox" class="w-3 h-3 md:w-3.5 md:h-3.5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> 
+                            <span>Aadhaar</span>
+                        </label>
+                        <input type="file" class="hidden" id="file_aadhaar">
+                        <button type="button" onclick="document.getElementById('file_aadhaar').click()" class="no-print bg-blue-50 hover:bg-blue-100 text-[#0c1a30] text-[8px] font-bold py-0.5 px-1 rounded border border-blue-200 text-center transition-colors">📁 Upload</button>
+                    </div>
+
+                    <!-- T.C. -->
+                    <div class="bg-slate-50 p-1 md:p-1.5 rounded border border-gray-200 flex flex-col justify-between gap-1 shadow-sm">
+                        <label class="flex items-center gap-1 cursor-pointer text-[8px] md:text-[8.5px] font-semibold text-gray-700">
+                            <input type="checkbox" class="w-3 h-3 md:w-3.5 md:h-3.5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> 
+                            <span>T.C. (ٹی سی)</span>
+                        </label>
+                        <input type="file" class="hidden" id="file_tc">
+                        <button type="button" onclick="document.getElementById('file_tc').click()" class="no-print bg-blue-50 hover:bg-blue-100 text-[#0c1a30] text-[8px] font-bold py-0.5 px-1 rounded border border-blue-200 text-center transition-colors">📁 Upload</button>
+                    </div>
+
+                    <!-- Marksheet -->
+                    <div class="bg-slate-50 p-1 md:p-1.5 rounded border border-gray-200 flex flex-col justify-between gap-1 shadow-sm">
+                        <label class="flex items-center gap-1 cursor-pointer text-[8px] md:text-[8.5px] font-semibold text-gray-700">
+                            <input type="checkbox" class="w-3 h-3 md:w-3.5 md:h-3.5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> 
+                            <span>Marksheet</span>
+                        </label>
+                        <input type="file" class="hidden" id="file_marksheet">
+                        <button type="button" onclick="document.getElementById('file_marksheet').click()" class="no-print bg-blue-50 hover:bg-blue-100 text-[#0c1a30] text-[8px] font-bold py-0.5 px-1 rounded border border-blue-200 text-center transition-colors">📁 Upload</button>
+                    </div>
+
+                    <!-- Birth Cert. -->
+                    <div class="bg-slate-50 p-1 md:p-1.5 rounded border border-gray-200 flex flex-col justify-between gap-1 shadow-sm">
+                        <label class="flex items-center gap-1 cursor-pointer text-[8px] md:text-[8.5px] font-semibold text-gray-700">
+                            <input type="checkbox" class="w-3 h-3 md:w-3.5 md:h-3.5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> 
+                            <span>Birth Cert.</span>
+                        </label>
+                        <input type="file" class="hidden" id="file_birth">
+                        <button type="button" onclick="document.getElementById('file_birth').click()" class="no-print bg-blue-50 hover:bg-blue-100 text-[#0c1a30] text-[8px] font-bold py-0.5 px-1 rounded border border-blue-200 text-center transition-colors">📁 Upload</button>
+                    </div>
+
+                    <!-- Address Proof -->
+                    <div class="bg-slate-50 p-1 md:p-1.5 rounded border border-gray-200 flex flex-col justify-between gap-1 shadow-sm">
+                        <label class="flex items-center gap-1 cursor-pointer text-[8px] md:text-[8.5px] font-semibold text-gray-700">
+                            <input type="checkbox" class="w-3 h-3 md:w-3.5 md:h-3.5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> 
+                            <span>Address Proof</span>
+                        </label>
+                        <input type="file" class="hidden" id="file_address">
+                        <button type="button" onclick="document.getElementById('file_address').click()" class="no-print bg-blue-50 hover:bg-blue-100 text-[#0c1a30] text-[8px] font-bold py-0.5 px-1 rounded border border-blue-200 text-center transition-colors">📁 Upload</button>
+                    </div>
+
+                    <!-- Photos -->
+                    <div class="bg-slate-50 p-1 md:p-1.5 rounded border border-gray-200 flex flex-col justify-between gap-1 shadow-sm">
+                        <label class="flex items-center gap-1 cursor-pointer text-[8px] md:text-[8.5px] font-semibold text-gray-700">
+                            <input type="checkbox" class="w-3 h-3 md:w-3.5 md:h-3.5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> 
+                            <span>Photos (02)</span>
+                        </label>
+                        <input type="file" class="hidden" id="file_photos">
+                        <button type="button" onclick="document.getElementById('file_photos').click()" class="no-print bg-blue-50 hover:bg-blue-100 text-[#0c1a30] text-[8px] font-bold py-0.5 px-1 rounded border border-blue-200 text-center transition-colors">📁 Upload</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. DECLARATION (WITH TICK OPTION) -->
+            <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-2.5 space-y-1.5 print-compact">
+                <div class="text-right font-urdu text-xs md:text-sm text-gray-700 leading-normal font-semibold">
+                    میں / ہم اس بات کا اقرار کرتے ہیں کہ فارم میں درج تمام معلومات بالکل درست ہیں۔ اگر کوئی بھی معلومات غلط یا ادھوری پائی گئی تو مدرسہ انتظامیہ کا فیصلہ حتمی ہوگا اور ہمیں قبول ہوگا۔
+                </div>
+                <div class="text-[8.5px] text-gray-500 italic leading-tight">
+                    I/We hereby solemnly declare that all the information provided in this admission form is true, complete and correct. I agree to fully abide by all the rules and regulations of the Madrasa.
+                </div>
+                
+                <!-- Interactive Tick / Agreement Option inside Declaration Box -->
+                <div class="border-t pt-1.5 flex items-center justify-between no-print">
+                    <label class="flex items-center gap-2 cursor-pointer bg-blue-50/50 py-1 px-2.5 rounded-lg border border-blue-100 hover:bg-blue-50 transition-all select-none">
+                        <input type="checkbox" required class="w-3.5 h-3.5 rounded text-blue-600 focus:ring-blue-500 border-gray-300">
+                        <span class="text-[11px] font-bold text-blue-900">I Agree / میں اقرار کرتا ہوں <span class="text-rose-500">*</span></span>
+                    </label>
+                    <span class="text-[8px] text-gray-400 font-semibold">* Checkbox tick karna lazmi hai form save karne ke liye.</span>
+                </div>
+            </div>
+
+            <!-- 7. SIGNATURES FOOTER -->
+            <div class="grid grid-cols-3 gap-2 pt-0.5 print-grid text-[8px] md:text-[8.5px] font-bold text-gray-600 text-center">
+                <div class="bg-white border rounded p-1.5"><div class="border-b border-dashed border-gray-300 pt-2 mb-1"></div>Guardian Signature <span class="font-urdu text-gray-400 block text-[9px]">سرپرست کے دستخط</span></div>
+                <div class="bg-white border rounded p-1.5"><div class="border-b border-dashed border-gray-300 pt-2 mb-1"></div>Parent Signature <span class="font-urdu text-gray-400 block text-[9px]">والدین کے دستخط</span></div>
+                <div class="bg-white border rounded p-1.5 relative"><div class="border-b border-dashed border-gray-300 pt-2 mb-1"></div>Principal Signature <span class="font-urdu text-gray-400 block text-[9px]">پرنسپل کے دستخط</span></div>
+            </div>
+
+            <!-- FORM ACTIONS (NO PRINT) -->
+            <div class="flex items-center justify-end gap-2 pt-2 border-t border-gray-200 no-print">
+                <button type="reset" class="bg-white border text-gray-700 font-bold text-xs px-3 py-1.5 rounded-xl hover:bg-gray-50">Clear</button>
+                <button type="submit" class="bg-blue-600 text-white font-bold text-xs px-4 py-1.5 rounded-xl hover:bg-blue-700 shadow-md">💾 Save Student</button>
+                <button type="button" onclick="window.print()" class="bg-emerald-600 text-white font-bold text-xs px-4 py-1.5 rounded-xl hover:bg-emerald-700 shadow-md">🖨️ Print Form</button>
+            </div>
+
+        </form>
+    </main>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('topAdmissionDate').value = new Date().toISOString().split('T')[0];
+            
+            // Strictly check and allow only numeric input dynamically
+            const numericInputs = document.querySelectorAll('.only-numbers');
+            numericInputs.forEach(input => {
+                input.addEventListener('input', function(e) {
+                    this.value = this.value.replace(/[^0-9]/g, '');
+                });
+            });
+        });
+
+        function previewStudentPhoto(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById('photoPreview');
+                    const placeholder = document.getElementById('photoPlaceholder');
+                    img.src = e.target.result;
+                    img.classList.remove('hidden');
+                    placeholder.classList.add('hidden');
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function handleAdmissionSubmit(event) {
+            event.preventDefault();
+            
+            const studentAadhaar = document.getElementById('studentAadhaar').value;
+            const fatherAadhaar = document.getElementById('fatherAadhaar').value;
+            const motherAadhaar = document.getElementById('motherAadhaar').value;
+            const mobile1 = document.getElementById('mobile1').value;
+            const mobile2 = document.getElementById('mobile2').value;
+
+            // Strict Aadhaar length checks if provided
+            if (studentAadhaar && studentAadhaar.length !== 12) {
+                alert("Student Aadhaar Number strictly 12 digits ka hona chahiye!");
+                return;
+            }
+            if (fatherAadhaar && fatherAadhaar.length !== 12) {
+                alert("Father Aadhaar Number strictly 12 digits ka hona chahiye!");
+                return;
+            }
+            if (motherAadhaar && motherAadhaar.length !== 12) {
+                alert("Mother Aadhaar Number strictly 12 digits ka hona chahiye!");
+                return;
+            }
+
+            if (mobile1.length !== 10) {
+                alert("Mobile No. 1 strictly 10 digits ka hona chahiye!");
+                return;
+            }
+            if (mobile2 && mobile2.length !== 10) {
+                alert("Mobile No. 2 strictly 10 digits ka hona chahiye!");
+                return;
+            }
+            
+            // Form values extract karna
+            const admissionNo = document.getElementById('topAdmissionNo').value;
+            const admissionDate = document.getElementById('topAdmissionDate').value;
+            const studentName = document.getElementById('studentName').value;
+            const studentClass = document.getElementById('studentClass').value;
+            const fatherName = document.getElementById('fatherName').value;
+            const address = document.getElementById('fullAddress').value;
+
+            // Local Storage me save karna taki Fee Receipt access kar sake
+            localStorage.setItem('receipt_adm_no', admissionNo);
+            localStorage.setItem('receipt_date', admissionDate);
+            localStorage.setItem('receipt_name', studentName);
+            localStorage.setItem('receipt_class', studentClass);
+            localStorage.setItem('receipt_father', fatherName);
+            localStorage.setItem('receipt_address', address);
+
+            // Trigger WhatsApp Web Integration Function
+            sendWhatsAppNotification(mobile1, studentName, admissionNo);
+
+            alert("Student Data saved successfully! WhatsApp notification screen open ho rahi hai aur ab automatically Fee Receipt khulegi.");
+            
+            // Redirecting to fee receipt structure page
+            window.location.href = "fee_receipt.html";
+        }
+
+        // WhatsApp trigger integration
+        // WhatsApp trigger integration
+        function sendWhatsAppNotification(parentMobile, studentName, admissionNo) {
+            // Aapka actual free live link
+            const statusLink = `https://maqboolahmadnoori-eng.github.io/ziyaululoom/status.html?adm=${admissionNo}`;
+            
+            // Clear structure dynamic Urdu/English message layout
+            const message = `Assalamu Alaikum,\n\n*Madrasa Arabia Ziyaul Uloom*\n\nStudent *${studentName}* ka admission successfully ho gaya hai.\n\nFee Receipt aur Monthly Fee Status (Kitna jama hai / kitna baqi hai) dekhne ke liye neeche diye gaye link par click karein:\n👉 ${statusLink}`;
+            
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/91${parentMobile}?text=${encodedMessage}`;
+            
+            // Open WhatsApp web or App dynamically in a new tab
+            window.open(whatsappURL, '_blank');
+        }
+    </script>
+</body>
+</html>

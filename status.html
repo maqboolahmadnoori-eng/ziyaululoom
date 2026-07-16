@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Fee Status</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6 flex justify-center items-center min-h-screen">
+    <div class="bg-white p-6 rounded-xl shadow-md w-full max-w-md">
+        <h2 class="text-xl font-bold text-center text-blue-900 mb-4">Madrasa Arabia Ziyaul Uloom</h2>
+        <div id="statusContent" class="space-y-3 text-sm">
+            <!-- Data dynamically insert hoga -->
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            // URL se admission number nikalna
+            const urlParams = new URLSearchParams(window.location.search);
+            const admNo = urlParams.get('adm');
+            
+            // LocalStorage se data check karna (Kyunki abhi database nahi hai)
+            const savedAdmNo = localStorage.getItem('receipt_adm_no');
+            
+            const contentDiv = document.getElementById('statusContent');
+            
+            if (admNo && admNo === savedAdmNo) {
+                const name = localStorage.getItem('receipt_name');
+                const studentClass = localStorage.getItem('receipt_class');
+                const father = localStorage.getItem('receipt_father');
+                
+                contentDiv.innerHTML = `
+                    <p class="border-b pb-1"><strong>Admission No:</strong> ${admNo}</p>
+                    <p class="border-b pb-1"><strong>Student Name:</strong> ${name}</p>
+                    <p class="border-b pb-1"><strong>Father's Name:</strong> ${father}</p>
+                    <p class="border-b pb-1"><strong>Class:</strong> ${studentClass}</p>
+                    <div class="mt-4 bg-emerald-50 p-3 rounded-lg border border-emerald-200 text-center">
+                        <span class="text-emerald-700 font-bold block">Fee Status (Paid / Dues)</span>
+                        <p class="text-xs text-gray-600 mt-1">Database se link hone par yahan poori months ki details dikhegi.</p>
+                    </div>
+                `;
+            } else {
+                contentDiv.innerHTML = `<p class="text-rose-500 text-center font-semibold">Student record not found or link expired!</p>`;
+            }
+        });
+    </script>
+</body>
+</html>
