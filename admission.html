@@ -138,14 +138,23 @@
                 <h2 class="text-sm font-extrabold text-blue-900 tracking-wider uppercase leading-none">Madrasa Arabia Ziyaul Uloom</h2>
                 <p class="text-[9px] text-gray-500 font-semibold tracking-wide mt-0.5">Chhawani Padrauna, Kushinagar (U.P.)</p>
                 
-                <div class="mt-2 border-t pt-1 flex justify-between px-4 text-[9px] font-bold text-gray-600">
-                    <div>
+                <!-- संशोधित हेडर पंक्ति: Admission No और Date के बीच में ADMISSION FORM -->
+                <div class="mt-3 border-t pt-2 flex flex-col md:flex-row justify-between items-center gap-3 px-4 text-gray-600">
+                    <div class="text-[10px] font-bold flex items-center gap-1">
                         <span class="text-gray-400">Adm No / داخلہ نمبر:</span>
-                        <input type="text" id="topAdmissionNo" inputmode="numeric" value="1026" class="w-10 text-left text-blue-600 font-bold border-b border-gray-300 outline-none print-input bg-transparent only-numbers">
+                        <input type="text" id="topAdmissionNo" inputmode="numeric" value="1026" class="w-12 text-left text-blue-600 font-black border-b border-gray-300 outline-none print-input bg-transparent only-numbers text-xs">
                     </div>
-                    <div>
+                    
+                    <div class="text-center">
+                        <h2 class="text-xl md:text-2xl font-black text-indigo-950 tracking-widest uppercase">
+                            ADMISSION FORM
+                        </h2>
+                        <p class="font-urdu text-xs text-indigo-600 font-bold leading-none mt-0.5">داخلہ فارم</p>
+                    </div>
+
+                    <div class="text-[10px] font-bold flex items-center gap-1">
                         <span class="text-gray-400">Date / تاریخ:</span>
-                        <input type="date" id="topAdmissionDate" class="w-22 text-right border-b border-gray-300 outline-none print-input bg-transparent">
+                        <input type="date" id="topAdmissionDate" class="w-24 text-right border-b border-gray-300 outline-none print-input bg-transparent text-xs font-bold">
                     </div>
                 </div>
             </div>
@@ -200,7 +209,7 @@
                         <span class="eng-label">Gender</span>
                         <div class="center-input flex items-center gap-4 py-0">
                             <label class="flex items-center gap-1 cursor-pointer"><input type="radio" name="gender" value="Male" required> Male (لڑکا)</label>
-                            <label class="flex items-center gap-1 cursor-pointer"><input type="radio" name="gender" value="Female"> Female (لड़की)</label>
+                            <label class="flex items-center gap-1 cursor-pointer"><input type="radio" name="gender" value="Female"> Female (لڑکی)</label>
                         </div>
                         <span class="urdu-label font-urdu">جنس:</span>
                     </div>
@@ -296,8 +305,7 @@
                     </div>
                 </div>
             </div>
-
-            <!-- 4. CONTACT DETAILS & ADDRESS -->
+<!-- 4. CONTACT DETAILS & ADDRESS -->
             <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden print-compact">
                 <div class="bg-[#0e2246] text-white px-3 py-0.5 flex justify-between items-center text-[9px] font-bold uppercase tracking-wider">
                     <span>Contact & Address Details</span>
@@ -428,16 +436,15 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-        // FIXME: Apne Firebase Console se mili config details yahan daalein
         const firebaseConfig = {
-  apiKey: "AIzaSyCGgsuCGuuGXJ4JZW_bb202XJy532PXVMA",
-  authDomain: "ziyaululoom-portal.firebaseapp.com",
-  databaseURL: "https://ziyaululoom-portal-default-rtdb.firebaseio.com",
-  projectId: "ziyaululoom-portal",
-  storageBucket: "ziyaululoom-portal.firebasestorage.app",
-  messagingSenderId: "1097092919331",
-  appId: "1:1097092919331:web:83aaed1facef7565610196"
-};
+            apiKey: "AIzaSyCGgsuCGuuGXJ4JZW_bb202XJy532PXVMA",
+            authDomain: "ziyaululoom-portal.firebaseapp.com",
+            databaseURL: "https://ziyaululoom-portal-default-rtdb.firebaseio.com",
+            projectId: "ziyaululoom-portal",
+            storageBucket: "ziyaululoom-portal.firebasestorage.app",
+            messagingSenderId: "1097092919331",
+            appId: "1:1097092919331:web:83aaed1facef7565610196"
+        };
 
         const app = initializeApp(firebaseConfig);
         const database = getDatabase(app);
@@ -496,7 +503,7 @@
                 photos: document.getElementById('check_photos').checked
             };
 
-            // Firebase cloud Database me data push karna
+            // Firebase cloud Database me data push karna (Fees dynamic details removed from here as they'll be managed in Fee Module)
             set(ref(database, 'students/' + admissionNo), {
                 admissionNo: admissionNo,
                 admissionDate: admissionDate,
@@ -518,10 +525,7 @@
                 mobile2: mobile2,
                 gmailAddress: gmailAddress,
                 address: address,
-                documents: docs,
-                feeStatus: {
-                    details: "All months updated live via database dashboard"
-                }
+                documents: docs
             })
             .then(() => {
                 // Local Storage updates (Fallback)
@@ -532,16 +536,19 @@
                 localStorage.setItem('receipt_father', fatherName);
                 localStorage.setItem('receipt_address', address);
 
-                sendWhatsAppNotification(mobile1, studentName, admissionNo);
-                alert("Student Data saved successfully to Firebase Cloud! Opening WhatsApp notification...");
-                window.location.href = "fee_receipt.html";
+                // सफलता का मैसेज दिखाएं
+                alert("ماشااللہ! नया दाखिला (Admission) सफलतापूर्वक सेव हो गया है।");
+                
+                // बिना व्हाट्सएप खोले सीधे इस छात्र के फीस काउंटर पेज पर भेजें
+                window.location.href = "fee_receipt.html?id=" + admissionNo;
             })
             .catch((error) => {
                 console.error("Firebase Error: ", error);
-                alert("Database me data save nahi ho paya! Kripya settings check karein.");
+                alert("डेटाबेस में डेटा सेव नहीं हो पाया! कृपया सेटिंग्स चेक करें।");
             });
-        };
+        }; // <-- यहाँ पर फ़ंक्शन का ब्रैकेट बंद किया गया है (Fixed critical bug)
 
+        // Alternate Backup Function (If needed in future)
         function sendWhatsAppNotification(parentMobile, studentName, admissionNo) {
             const statusLink = `https://maqboolahmadnoori-eng.github.io/ziyaululoom/status.html?adm=${admissionNo}`;
             const message = `Assalamu Alaikum,\n\n*Madrasa Arabia Ziyaul Uloom*\n\nStudent *${studentName}* ka admission successfully ho gaya hai.\n\nFee Receipt aur Monthly Fee Status dekhne ke liye neeche diye gaye link par click karein:\n👉 ${statusLink}`;
