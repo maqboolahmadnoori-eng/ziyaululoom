@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madrasa System - Student Management</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for Urdu & English Premium Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-urdu { font-family: 'Noto Sans Arabic', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #0c1a30; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-[#f4f6f9] text-gray-800 flex min-h-screen overflow-x-hidden">
+
+    <!-- 1. SIDE NAVIGATION (LEFT PANEL) -->
+    <aside class="w-72 bg-[#0c1a30] text-slate-300 flex flex-col justify-between shadow-2xl z-20 flex-shrink-0 sticky top-0 h-screen">
+        <div class="p-5 border-b border-slate-800 flex flex-col items-center bg-[#0a1628]">
+            <div class="w-16 h-16 bg-amber-500 rounded-full flex items-center justify-center mb-2 shadow-inner border-2 border-slate-700">
+                <span class="text-white font-bold text-xl">MAZU</span>
+            </div>
+            <h2 class="text-sm font-bold text-white tracking-wider text-center uppercase">MAIN MODULES</h2>
+            <p class="font-urdu text-xs text-amber-500 mt-0.5">اہم ماڈیولز</p>
+        </div>
+
+        <nav class="flex-grow p-4 space-y-1.5 overflow-y-auto custom-scrollbar text-sm">
+            <a href="index.html" class="flex items-center justify-between px-4 py-3 hover:bg-slate-800 rounded-xl transition-colors hover:text-white">
+                <div class="flex items-center gap-3"><span>📊</span><span>Dashboard</span></div>
+                <span class="font-urdu text-xs text-gray-400">ڈیش بورڈ</span>
+            </a>
+            <a href="student_management.html" class="flex items-center justify-between px-4 py-3 bg-blue-600 text-white rounded-xl font-semibold transition-all shadow-md shadow-blue-900/30">
+                <div class="flex items-center gap-3"><span>👨‍🎓</span><span>Student Management</span></div>
+                <span class="font-urdu text-xs opacity-90">طالب علم</span>
+            </a>
+            <a href="admission.html" class="flex items-center justify-between px-4 py-3 hover:bg-slate-800 rounded-xl transition-colors hover:text-white">
+                <div class="flex items-center gap-3"><span>📝</span><span>Admission</span></div>
+                <span class="font-urdu text-xs text-gray-400">داخلہ</span>
+            </a>
+            <a href="#" class="flex items-center justify-between px-4 py-3 hover:bg-slate-800 rounded-xl transition-colors hover:text-white">
+                <div class="flex items-center gap-3"><span>💵</span><span>Fees Management</span></div>
+                <span class="font-urdu text-xs text-gray-400">فیس ▾</span>
+            </a>
+            <a href="#" class="flex items-center justify-between px-4 py-3 hover:bg-slate-800 rounded-xl transition-colors hover:text-white">
+                <div class="flex items-center gap-3"><span>📅</span><span>Attendance</span></div>
+                <span class="font-urdu text-xs text-gray-400">حاضری ▾</span>
+            </a>
+        </nav>
+
+        <div class="p-4 border-t border-slate-800 bg-[#0a1628]">
+            <a href="#" class="flex items-center justify-between px-4 py-2.5 bg-rose-950/40 text-rose-400 hover:bg-rose-900/40 rounded-lg transition-colors">
+                <div class="flex items-center gap-3 font-semibold"><span>🚪</span><span>Logout</span></div>
+                <span class="font-urdu text-xs">خروج</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- RIGHT SIDE CONTENT AREA -->
+    <main class="flex-grow flex flex-col min-w-0 overflow-y-auto h-screen p-6 space-y-6">
+        
+        <!-- HEADER -->
+        <header class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-4">
+                <div class="w-14 h-14 bg-blue-50 rounded-xl border border-blue-200 flex items-center justify-center text-2xl shadow-sm">👨‍🎓</div>
+                <div>
+                    <h1 class="text-xl font-bold text-[#0c1a30]">Student Management System</h1>
+                    <p class="font-urdu text-xs text-amber-600 font-bold">طالب علموں کا انتظام اور ریکارڈ کی فہرست</p>
+                </div>
+            </div>
+            <a href="admission.html" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow transition-all flex items-center gap-2">
+                <span>➕</span> New Admission / نیا داخلہ
+            </a>
+        </header>
+
+        <!-- SEARCH & FILTER TOOLBAR -->
+        <section class="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+            <div class="relative md:col-span-2">
+                <span class="absolute left-3.5 top-2.5 text-gray-400">🔍</span>
+                <input type="text" placeholder="Search by Student Name, Roll No..." class="w-full bg-slate-50 border border-gray-200 rounded-xl pl-10 pr-4 py-2 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div>
+                <!-- Class Filter with English + Urdu Nursery to 10th -->
+                <select class="w-full bg-slate-50 border border-gray-200 rounded-xl px-3 py-2 text-xs font-bold text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">Filter by Class (کلاس منتخب کریں)</option>
+                    <option>Nursery (نرسری)</option>
+                    <option>LKG (ایل کے جی)</option>
+                    <option>UKG (یو کے جی)</option>
+                    <option>1st Class (پہلی کلاس)</option>
+                    <option>2nd Class (دوسری کلاس)</option>
+                    <option>3rd Class (تیسری کلاس)</option>
+                    <option>4th Class (چوتھی کلاس)</option>
+                    <option>5th Class (پانچویں کلاس)</option>
+                    <option>6th Class (چھٹی کلاس)</option>
+                    <option>7th Class (ساتویں کلاس)</option>
+                    <option>8th Class (آٹھویں کلاس)</option>
+                    <option>9th Class (نویں کلاس)</option>
+                    <option>10th Class (دسویں کلاس)</option>
+                </select>
+            </div>
+            <div>
+                <select class="w-full bg-slate-50 border border-gray-200 rounded-xl px-3 py-2 text-xs font-bold text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">Status (حالت)</option>
+                    <option value="active">Active (فعال)</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- STUDENT TABLE -->
+        <section class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-50 border-b border-gray-100 text-[11px] font-bold uppercase tracking-wider text-gray-500">
+                            <th class="p-4">Roll No</th>
+                            <th class="p-4">Student Name</th>
+                            <th class="p-4">Father Name</th>
+                            <th class="p-4">Class</th>
+                            <th class="p-4">Contact</th>
+                            <th class="p-4 text-center">Fee Status</th>
+                            <th class="p-4 text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentTableBody" class="divide-y divide-gray-50 text-xs font-medium text-gray-700">
+                        
+                        <!-- Row 1 -->
+                        <tr id="row-1024" class="hover:bg-slate-50/80 transition-colors">
+                            <td class="p-4 font-bold text-blue-600">#1024</td>
+                            <td class="p-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold">MA</div>
+                                    <div class="flex flex-col">
+                                        <span class="font-bold text-gray-900">Muhammad Ali</span>
+                                        <span class="font-urdu text-[10px] text-gray-400">محمد علی</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="p-4">Asghar Ali</td>
+                            <td class="p-4"><span class="bg-blue-50 text-blue-700 px-2.5 py-1 rounded-md font-bold">1st Class (پہلی کلاس)</span></td>
+                            <td class="p-4">+91 9876543210</td>
+                            <td class="p-4 text-center"><span class="bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-full text-[10px] font-bold">Paid</span></td>
+                            <td class="p-4 text-center flex items-center justify-center gap-2">
+                                <button onclick="openViewModal('#1024', 'Muhammad Ali', 'محمد علی', 'Asghar Ali', '1st Class (پہلی کلاس)', '+91 9876543210', 'Paid', 'A+', '01-Jan-2015', 'Main Street, Delhi')" class="bg-blue-50 text-blue-700 hover:bg-blue-100 px-2 py-1 rounded-md font-bold transition-colors">👁️ View</button>
+                                <button onclick="openEditModal('#1024', 'Muhammad Ali', 'Asghar Ali', '1st Class (پہلی کلاس)', '+91 9876543210', 'Paid')" class="bg-amber-50 text-amber-700 hover:bg-amber-100 px-2 py-1 rounded-md font-bold transition-colors">✏️ Edit</button>
+                                <button onclick="deleteStudent('row-1024')" class="bg-rose-50 text-rose-700 hover:bg-rose-100 px-2 py-1 rounded-md font-bold transition-colors">🗑️ Delete</button>
+                            </td>
+                        </tr>
+
+                        <!-- Row 2 -->
+                        <tr id="row-1025" class="hover:bg-slate-50/80 transition-colors">
+                            <td class="p-4 font-bold text-blue-600">#1025</td>
+                            <td class="p-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold">MH</div>
+                                    <div class="flex flex-col">
+                                        <span class="font-bold text-gray-900">Muhammad Hassan</span>
+                                        <span class="font-urdu text-[10px] text-gray-400">محمد حسان</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="p-4">Sajid Hussain</td>
+                            <td class="p-4"><span class="bg-blue-50 text-blue-700 px-2.5 py-1 rounded-md font-bold">5th Class (پانچویں کلاس)</span></td>
+                            <td class="p-4">+91 9988776655</td>
+                            <td class="p-4 text-center"><span class="bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full text-[10px] font-bold">Partial</span></td>
+                            <td class="p-4 text-center flex items-center justify-center gap-2">
+                                <button onclick="openViewModal('#1025', 'Muhammad Hassan', 'محمد حسان', 'Sajid Hussain', '5th Class (پانچویں کلاس)', '+91 9988776655', 'Partial', 'O+', '12-Mar-2012', 'Chowk Area, Lucknow')" class="bg-blue-50 text-blue-700 hover:bg-blue-100 px-2 py-1 rounded-md font-bold transition-colors">👁️ View</button>
+                                <button onclick="openEditModal('#1025', 'Muhammad Hassan', 'Sajid Hussain', '5th Class (پانچویں کلاس)', '+91 9988776655', 'Partial')" class="bg-amber-50 text-amber-700 hover:bg-amber-100 px-2 py-1 rounded-md font-bold transition-colors">✏️ Edit</button>
+                                <button onclick="deleteStudent('row-1025')" class="bg-rose-50 text-rose-700 hover:bg-rose-100 px-2 py-1 rounded-md font-bold transition-colors">🗑️ Delete</button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL 1: VIEW STUDENT FULL DETAILS -->
+    <div id="viewModal" class="fixed inset-0 bg-black/50 hidden flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl w-full max-w-md overflow-hidden shadow-2xl">
+            <div class="bg-[#0c1a30] text-white p-4 flex justify-between items-center">
+                <h3 class="font-bold text-sm">Student Profile Card</h3>
+                <button onclick="closeModal('viewModal')" class="text-xl font-bold hover:text-amber-50">&times;</button>
+            </div>
+            <div class="p-6 flex flex-col items-center space-y-4">
+                <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center text-3xl border">👤</div>
+                <div class="text-center">
+                    <h2 id="viewName" class="text-lg font-bold text-gray-900"></h2>
+                    <p id="viewUrduName" class="font-urdu text-sm text-amber-600 font-bold"></p>
+                </div>
+                <hr class="w-full border-gray-100">
+                <div class="w-full text-xs space-y-2.5">
+                    <div class="flex justify-between"><span class="text-gray-400">Roll Number:</span> <span id="viewRoll" class="font-bold text-blue-600"></span></div>
+                    <div class="flex justify-between"><span class="text-gray-400">Father's Name:</span> <span id="viewFather" class="font-bold"></span></div>
+                    <div class="flex justify-between"><span class="text-gray-400">Class Enrolled:</span> <span id="viewClass" class="bg-slate-100 px-2 py-0.5 rounded font-bold text-gray-700"></span></div>
+                    <div class="flex justify-between"><span class="text-gray-400">Contact Number:</span> <span id="viewContact" class="font-bold"></span></div>
+                    <div class="flex justify-between"><span class="text-gray-400">DOB (تاریخ پیدائش):</span> <span id="viewDob" class="font-bold"></span></div>
+                    <div class="flex justify-between"><span class="text-gray-400">Blood Group:</span> <span id="viewBlood" class="text-rose-600 font-bold"></span></div>
+                    <div class="flex justify-between"><span class="text-gray-400">Fee Status:</span> <span id="viewFee" class="px-2 py-0.5 rounded font-bold"></span></div>
+                    <div class="flex justify-between"><span class="text-gray-400">Full Address:</span> <span id="viewAddress" class="font-bold text-gray-600 max-w-[200px] text-right"></span></div>
+                </div>
+                <button onclick="closeModal('viewModal')" class="w-full mt-2 bg-slate-800 text-white font-bold py-2 rounded-xl text-xs hover:bg-slate-900 transition-colors">Close Profile</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: EDIT / UPDATE STUDENT FORM -->
+    <div id="editModal" class="fixed inset-0 bg-black/50 hidden flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl w-full max-w-md overflow-hidden shadow-2xl">
+            <div class="bg-[#0c1a30] text-white p-4 flex justify-between items-center">
+                <h3 class="font-bold text-sm">Update Student Information</h3>
+                <button onclick="closeModal('editModal')" class="text-xl font-bold hover:text-amber-50">&times;</button>
+            </div>
+            <form id="editForm" onsubmit="saveUpdatedData(event)" class="p-6 space-y-4 text-xs font-semibold">
+                <input type="hidden" id="editRowId">
+                <div>
+                    <label class="block text-gray-500 mb-1">Student Name</label>
+                    <input type="text" id="editName" class="w-full bg-slate-50 border rounded-xl p-2.5 focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-gray-500 mb-1">Father's Name</label>
+                    <input type="text" id="editFather" class="w-full bg-slate-50 border rounded-xl p-2.5 focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-gray-500 mb-1">Class</label>
+                        <!-- Edit form class menu with English + Urdu -->
+                        <select id="editClass" class="w-full bg-slate-50 border rounded-xl p-2.5 focus:ring-2 focus:ring-blue-500 outline-none font-medium">
+                            <option>Nursery (نرسری)</option>
+                            <option>LKG (ایل کے جی)</option>
+                            <option>UKG (یو کے جی)</option>
+                            <option>1st Class (پہلی کلاس)</option>
+                            <option>2nd Class (دوسری کلاس)</option>
+                            <option>3rd Class (تیسری کلاس)</option>
+                            <option>4th Class (چوتھی کلاس)</option>
+                            <option>5th Class (پانچویں کلاس)</option>
+                            <option>6th Class (چھٹی کلاس)</option>
+                            <option>7th Class (ساتویں کلاس)</option>
+                            <option>8th Class (آٹھویں کلاس)</option>
+                            <option>9th Class (نویں کلاس)</option>
+                            <option>10th Class (دسویں کلاس)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-500 mb-1">Fee Status</label>
+                        <select id="editFee" class="w-full bg-slate-50 border rounded-xl p-2.5 focus:ring-2 focus:ring-blue-500 outline-none">
+                            <option>Paid</option>
+                            <option>Partial</option>
+                            <option>Pending</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-gray-500 mb-1">Contact Phone</label>
+                    <input type="text" id="editContact" class="w-full bg-slate-50 border rounded-xl p-2.5 focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div class="flex gap-2 pt-2">
+                    <button type="button" onclick="closeModal('editModal')" class="w-1/2 bg-gray-100 text-gray-700 font-bold py-2.5 rounded-xl hover:bg-gray-200 transition-colors">Cancel</button>
+                    <button type="submit" class="w-1/2 bg-blue-600 text-white font-bold py-2.5 rounded-xl hover:bg-blue-700 shadow-md transition-colors">Update & Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- INTERACTIVE JAVASCRIPT FUNCTIONS -->
+    <script>
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        function openViewModal(roll, name, urduName, father, sClass, contact, fee, blood, dob, address) {
+            document.getElementById('viewRoll').innerText = roll;
+            document.getElementById('viewName').innerText = name;
+            document.getElementById('viewUrduName').innerText = urduName;
+            document.getElementById('viewFather').innerText = father;
+            document.getElementById('viewClass').innerText = sClass;
+            document.getElementById('viewContact').innerText = contact;
+            document.getElementById('viewFee').innerText = fee;
+            document.getElementById('viewBlood').innerText = blood;
+            document.getElementById('viewDob').innerText = dob;
+            document.getElementById('viewAddress').innerText = address;
+            
+            document.getElementById('viewModal').classList.remove('hidden');
+        }
+
+        function openEditModal(roll, name, father, sClass, contact, fee) {
+            document.getElementById('editRowId').value = "row-" + roll.replace('#', '');
+            document.getElementById('editName').value = name;
+            document.getElementById('editFather').value = father;
+            document.getElementById('editClass').value = sClass;
+            document.getElementById('editContact').value = contact;
+            document.getElementById('editFee').value = fee;
+
+            document.getElementById('editModal').classList.remove('hidden');
+        }
+
+        function saveUpdatedData(event) {
+            event.preventDefault();
+            let rowId = document.getElementById('editRowId').value;
+            let targetRow = document.getElementById(rowId);
+            let selectedClass = document.getElementById('editClass').value;
+            let rollNo = "#" + rowId.replace('row-', '');
+
+            if (targetRow) {
+                let updatedName = document.getElementById('editName').value;
+                let updatedFather = document.getElementById('editFather').value;
+                let updatedContact = document.getElementById('editContact').value;
+                let newFee = document.getElementById('editFee').value;
+
+                targetRow.cells[1].querySelector('.font-bold').innerText = updatedName;
+                targetRow.cells[2].innerText = updatedFather;
+                targetRow.cells[3].querySelector('span').innerText = selectedClass;
+                targetRow.cells[4].innerText = updatedContact;
+                
+                let feeSpan = targetRow.cells[5].querySelector('span');
+                feeSpan.innerText = newFee;
+                
+                if(newFee === 'Paid') { feeSpan.className = "bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-full text-[10px] font-bold"; }
+                else if(newFee === 'Partial') { feeSpan.className = "bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full text-[10px] font-bold"; }
+                else { feeSpan.className = "bg-rose-50 text-rose-700 px-2.5 py-1 rounded-full text-[10px] font-bold"; }
+
+                let viewBtn = targetRow.cells[6].querySelectorAll('button')[0];
+                let urduNameStr = targetRow.cells[1].querySelector('.font-urdu').innerText;
+                viewBtn.setAttribute('onclick', `openViewModal('${rollNo}', '${updatedName}', '${urduNameStr}', '${updatedFather}', '${selectedClass}', '${updatedContact}', '${newFee}', 'A+', '01-Jan-2015', 'Main Street, Delhi')`);
+
+                let editBtn = targetRow.cells[6].querySelectorAll('button')[1];
+                editBtn.setAttribute('onclick', `openEditModal('${rollNo}', '${updatedName}', '${updatedFather}', '${selectedClass}', '${updatedContact}', '${newFee}')`);
+            }
+            closeModal('editModal');
+        }
+
+        function deleteStudent(rowId) {
+            if (confirm("Kya aap sach me is student ka record delete karna chahte hain?")) {
+                let row = document.getElementById(rowId);
+                if (row) { row.remove(); }
+            }
+        }
+    </script>
+</body>
+</html>

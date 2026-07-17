@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madrasa Arabia Ziyaul Uloom - Dashboard</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN for Professional Graphics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts for Urdu & English Premium Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-urdu { font-family: 'Noto Sans Arabic', sans-serif; dir: rtl; }
+        /* Custom scrollbar for sidebar */
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #0c1a30; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-[#f4f6f9] text-gray-800 flex min-h-screen overflow-x-hidden">
+
+    <!-- ========================================================================= -->
+    <!-- 1. SIDE NAVIGATION (LEFT PANEL) - COMPLETE AS PER BLUEPRINT -->
+    <!-- ========================================================================= -->
+    <aside class="w-72 bg-[#0c1a30] text-slate-300 flex flex-col justify-between shadow-2xl z-20 flex-shrink-0 sticky top-0 h-screen">
+        
+        <!-- Sidebar Brand Area -->
+        <div class="p-5 border-b border-slate-800 flex flex-col items-center bg-[#0a1628]">
+            <div class="w-16 h-16 bg-amber-500 rounded-full flex items-center justify-center mb-2 shadow-inner border-2 border-slate-700">
+                <!-- System Logo Placeholder -->
+                <span class="text-white font-bold text-xl">MAZU</span>
+            </div>
+            <h2 class="text-sm font-bold text-white tracking-wider text-center uppercase">MAIN MODULES</h2>
+            <p class="font-urdu text-xs text-amber-500 mt-0.5">اہم ماڈیولز</p>
+        </div>
+
+        <!-- Sidebar Navigation List (Custom Scrollable if needed) -->
+        <nav class="flex-grow p-4 space-y-1.5 overflow-y-auto custom-scrollbar text-sm">
+            
+            <!-- Dashboard Active Link -->
+            <a href="index.html" class="flex items-center justify-between px-4 py-3 bg-blue-600 text-white rounded-xl font-semibold transition-all shadow-md shadow-blue-900/30">
+                <div class="flex items-center gap-3">
+                    <span>📊</span>
+                    <span>Dashboard</span>
+                </div>
+                <span class="font-urdu text-xs opacity-90">ڈیش بورڈ</span>
+            </a>
+
+            <!-- Student Management Dropdown -->
+            <div class="group">
+                <a href="student_management.html" class="flex items-center justify-between px-4 py-3 hover:bg-slate-800 rounded-xl transition-colors group-hover:text-white">
+                    <div class="flex items-center gap-3">
+                        <span>👨‍🎓</span>
+                        <span>Student Management</span>
+                    </div>
+                    <span class="font-urdu text-xs text-gray-400">طالب علم ▾</span>
+                </a>
+            </div>
+
+            <!-- Admission Link (Linked to dynamic standalone file) -->
+            <a href="admission.html" class="flex items-center justify-between px-4 py-3 hover:bg-slate-800 rounded-xl transition-colors hover:text-white">
+                <div class="flex items-center gap-3">
+                    <span>📝</span>
+                    <span>Admission</span>
+                </div>
+                <span class="font-urdu text-xs text-gray-400">داخلہ ▾</span>
+            </a>
+
+            <!-- Fees Management Link (Linked to dynamic standalone file) -->
+            <a href="fee_counter.html" class="flex items-center justify-between px-4 py-3 hover:bg-slate-800 rounded-xl transition-colors hover:text-white">
+                <div class="flex items-center gap-3">
+                    <span>💵</span>
+                    <span>Fees Management</span>
+                </div>
+                <span class="font-urdu text-xs text-gray-400">فیس ▾</span>
+            </a>
+
+            <!-- Attendance -->
+            <a href="#" class="flex items-center justify-between px-4 py-3 hover:bg-slate-800 rounded-xl transition-colors hover:text-white">
+                <div class="flex items-center gap-3">
+                    <span>📅</span>
+                    <span>Attendance</span>
+                </div>
+                <span class="font-urdu text-xs text-gray-400">حاضری ▾</span>
+            </a>
+
+            <!-- Examination -->
+            <a href="#" class="flex items-center justify-between px-4 py-3 hover:bg-slate-800 rounded-xl transition-colors hover:text-white">
+                <div class="flex items-center gap-3">
+                    <span>📝</span>
+                    <span>Examination</span>
+                </div>
+                <span class="font-urdu text-xs text-gray-400">امتحانات ▾</span>
+            </a>
+
+            <!-- Marks & Result -->
+            <a href="#" class="flex items-center justify-between px-4 py-3 hover:bg-slate-800 rounded-xl transition-colors hover:text-white">
+                <div class="flex items-center gap-3">
+                    <span>🏆</span>
+                    <span>Marks & Result</span>
+                </div>
+                <span class="font-urdu text-xs text-gray-400">نمبرات و نتائج</span>
+            </a>
+
+            <!-- Library -->
+            <a href="#" class="flex items-center justify-between px-4 py-3 hover:bg-slate-800 rounded-xl transition-colors hover:text-white">
+                <div class="flex items-center gap-3">
+                    <span>📚</span>
+                    <span>Library</span>
+                </div>
+                <span class="font-urdu text-xs text-gray-400">کتب خانہ</span>
+            </a>
+
+            <!-- Transport -->
+            <a href="#" class="flex items-center justify-between px-4 py-3 hover:bg-slate-800 rounded-xl transition-colors hover:text-white">
+                <div class="flex items-center gap-3">
+                    <span>🚌</span>
+                    <span>Transport</span>
+                </div>
+                <span class="font-urdu text-xs text-gray-400">ٹرانسپورٹ ▾</span>
+            </a>
+
+            <!-- Staff Management -->
+            <a href="#" class="flex items-center justify-between px-4 py-3 hover:bg-slate-800 rounded-xl transition-colors hover:text-white">
+                <div class="flex items-center gap-3">
+                    <span>💼</span>
+                    <span>Staff Management</span>
+                </div>
+                <span class="font-urdu text-xs text-gray-400">عملہ ▾</span>
+            </a>
+
+            <!-- Notice Board -->
+            <a href="#" class="flex items-center justify-between px-4 py-3 hover:bg-slate-800 rounded-xl transition-colors hover:text-white">
+                <div class="flex items-center gap-3">
+                    <span>📢</span>
+                    <span>Notice Board</span>
+                </div>
+                <span class="font-urdu text-xs text-gray-400">نوٹس بورڈ</span>
+            </a>
+
+            <!-- Reports -->
+            <a href="#" class="flex items-center justify-between px-4 py-3 hover:bg-slate-800 rounded-xl transition-colors hover:text-white">
+                <div class="flex items-center gap-3">
+                    <span>📊</span>
+                    <span>Reports</span>
+                </div>
+                <span class="font-urdu text-xs text-gray-400">رپورٹس</span>
+            </a>
+
+            <!-- Settings -->
+            <a href="#" class="flex items-center justify-between px-4 py-3 hover:bg-slate-800 rounded-xl transition-colors hover:text-white">
+                <div class="flex items-center gap-3">
+                    <span>⚙️</span>
+                    <span>Settings</span>
+                </div>
+                <span class="font-urdu text-xs text-gray-400">سیٹنگز</span>
+            </a>
+
+            <!-- Backup & Restore -->
+            <a href="#" class="flex items-center justify-between px-4 py-3 hover:bg-slate-800 rounded-xl transition-colors hover:text-white">
+                <div class="flex items-center gap-3">
+                    <span>💾</span>
+                    <span>Backup & Restore</span>
+                </div>
+                <span class="font-urdu text-xs text-gray-400">بیک اپ</span>
+            </a>
+        </nav>
+
+        <!-- Sidebar Bottom Footer / Logout -->
+        <div class="p-4 border-t border-slate-800 bg-[#0a1628]">
+            <a href="#" class="flex items-center justify-between px-4 py-2.5 bg-rose-950/40 text-rose-400 hover:bg-rose-900/40 rounded-lg transition-colors group">
+                <div class="flex items-center gap-3 font-semibold">
+                    <span>🚪</span>
+                    <span>Logout</span>
+                </div>
+                <span class="font-urdu text-xs">خروج</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- ========================================================================= -->
+    <!-- RIGHT SIDE CONTENT AREA (MAIN HUB) -->
+    <!-- ========================================================================= -->
+    <main class="flex-grow flex flex-col min-w-0 overflow-y-auto h-screen p-6 space-y-6">
+
+        <!-- ========================================================================= -->
+        <!-- 2. HEADER SECTION - AS PER BLUEPRINT IMAGE -->
+        <!-- ========================================================================= -->
+        <header class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 flex flex-col md:flex-row items-center justify-between gap-4">
+            <!-- Left Logo & Madrasa Heading Name Combo -->
+            <div class="flex items-center gap-4">
+                <div class="w-14 h-14 bg-blue-50 rounded-xl border border-blue-200 flex items-center justify-center text-2xl shadow-sm">
+                    🕌
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-[#0c1a30] font-urdu leading-tight">مدرسه عربيه ضياء العلوم</h1>
+                    <p class="text-xs font-bold tracking-wide text-gray-700 uppercase mt-0.5">MADRASA ARABIA ZIYAUL ULOOM</p>
+                    <div class="flex items-center gap-2 mt-0.5 text-[11px] text-gray-500 font-medium">
+                        <span class="font-urdu text-amber-600">چھاؤنی پڈروانہ، کشی نگر (یو.پی.)</span>
+                        <span>•</span>
+                        <span>CHHAWANI PADRAUNA, KUSHINAGAR (U.P.)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Header Meta Information Box (Widgets Area) -->
+            <div class="flex flex-wrap items-center gap-4">
+                <!-- Date Widget Box -->
+                <div class="flex items-center gap-2.5 bg-slate-50 border border-gray-200 rounded-xl px-4 py-2 text-xs font-semibold shadow-inner">
+                    <span class="text-lg">📅</span>
+                    <div class="flex flex-col">
+                        <span class="text-gray-400 text-[10px] uppercase tracking-wider">Date</span>
+                        <span id="current-date-lbl" class="text-gray-800">14 Jul 2026</span>
+                    </div>
+                </div>
+
+                <!-- Time Widget Box -->
+                <div class="flex items-center gap-2.5 bg-slate-50 border border-gray-200 rounded-xl px-4 py-2 text-xs font-semibold shadow-inner">
+                    <span class="text-lg">⏰</span>
+                    <div class="flex flex-col">
+                        <span class="text-gray-400 text-[10px] uppercase tracking-wider">Time</span>
+                        <span id="current-time-lbl" class="text-gray-800">10:30 AM</span>
+                    </div>
+                </div>
+
+                <!-- Notification Alert Icon Badge -->
+                <div class="relative bg-slate-50 p-2.5 border border-gray-200 rounded-xl cursor-pointer hover:bg-gray-100 transition-colors">
+                    <span class="text-lg">🔔</span>
+                    <span class="absolute -top-1.5 -right-1.5 bg-rose-500 text-white font-bold text-[10px] w-5 h-5 rounded-full flex items-center justify-center border-2 border-white shadow">5</span>
+                </div>
+
+                <!-- Academic Session Selector -->
+                <div class="flex flex-col">
+                    <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider pl-1 mb-0.5">Academic Year</span>
+                    <select class="bg-white border border-gray-300 rounded-xl px-3 py-1.5 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option>2026-27</option>
+                        <option selected>2025-26</option>
+                        <option>2024-25</option>
+                    </select>
+                </div>
+
+                <!-- Active Admin User Avatar Profile Menu Dropdown -->
+                <div class="flex items-center gap-3 border-l pl-4 border-gray-200">
+                    <div class="flex flex-col text-right">
+                        <span class="text-[10px] text-gray-400 font-bold uppercase">Welcome</span>
+                        <span class="text-xs font-bold text-gray-800 flex items-center gap-1">Admin / <span class="font-urdu text-amber-700">مدیر نظام</span></span>
+                    </div>
+                    <div class="w-10 h-10 bg-gradient-to-tr from-blue-600 to-indigo-600 text-white rounded-full font-bold flex items-center justify-center shadow cursor-pointer border-2 border-white">
+                        A
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- ========================================================================= -->
+        <!-- 3. SUMMARY STATS COUNTERS (TOP COUNTER ROW) -->
+        <!-- ========================================================================= -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <!-- 1. Total Students Card -->
+            <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex items-center justify-between group hover:shadow-md transition-shadow">
+                <div class="space-y-1">
+                    <p class="text-xs text-gray-400 font-bold uppercase tracking-wide">Total Students</p>
+                    <h3 class="text-2xl font-black text-gray-900">1,248</h3>
+                    <p class="font-urdu text-xs text-blue-600 font-bold">کل طلبہ</p>
+                </div>
+                <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 text-xl flex items-center justify-center font-bold">👥</div>
+            </div>
+
+            <!-- 2. Male Students Card -->
+            <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex items-center justify-between group hover:shadow-md transition-shadow">
+                <div class="space-y-1">
+                    <p class="text-xs text-gray-400 font-bold uppercase tracking-wide">Male Students</p>
+                    <h3 class="text-2xl font-black text-gray-900">862</h3>
+                    <p class="font-urdu text-xs text-emerald-600 font-bold">طالب علم (لڑکے)</p>
+                </div>
+                <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 text-xl flex items-center justify-center font-bold">👨</div>
+            </div>
+
+            <!-- 3. Female Students Card -->
+            <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex items-center justify-between group hover:shadow-md transition-shadow">
+                <div class="space-y-1">
+                    <p class="text-xs text-gray-400 font-bold uppercase tracking-wide">Female Students</p>
+                    <h3 class="text-2xl font-black text-gray-900">386</h3>
+                    <p class="font-urdu text-xs text-rose-600 font-bold">طالبات (لڑکیاں)</p>
+                </div>
+                <div class="w-12 h-12 rounded-xl bg-rose-50 text-rose-600 text-xl flex items-center justify-center font-bold">👩</div>
+            </div>
+
+            <!-- 4. Total Staff Card -->
+            <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex items-center justify-between group hover:shadow-md transition-shadow">
+                <div class="space-y-1">
+                    <p class="text-xs text-gray-400 font-bold uppercase tracking-wide">Total Staff</p>
+                    <h3 class="text-2xl font-black text-gray-900">48</h3>
+                    <p class="font-urdu text-xs text-amber-600 font-bold">کل عملہ</p>
+                </div>
+                <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 text-xl flex items-center justify-center font-bold">🎓</div>
+            </div>
+
+            <!-- 5. New Admission Card -->
+            <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex items-center justify-between group hover:shadow-md transition-shadow">
+                <div class="space-y-1">
+                    <p class="text-xs text-gray-400 font-bold uppercase tracking-wide">New Admission</p>
+                    <h3 class="text-2xl font-black text-gray-900">62</h3>
+                    <p class="font-urdu text-xs text-purple-600 font-bold">نئے داخلے</p>
+                </div>
+                <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 text-xl flex items-center justify-center font-bold">➕</div>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- 4. CHARTS & GRAPHS ENGINE INTERFACES (CENTER ROW) -->
+        <!-- ========================================================================= -->
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- A. Students by Class Bar Chart Card -->
+            <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between">
+                <div class="flex items-center justify-between mb-4 border-b border-gray-50 pb-2">
+                    <h4 class="text-sm font-bold text-gray-700 uppercase tracking-wide">Students by Class</h4>
+                    <span class="font-urdu text-xs font-bold text-blue-600">طلبہ کی تعداد کلاس وار</span>
+                </div>
+                <div class="h-56 relative w-full">
+                    <canvas id="chart-class-bar"></canvas>
+                </div>
+            </div>
+
+            <!-- B. Monthly Fee Collection Line Chart Card -->
+            <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between">
+                <div class="flex items-center justify-between mb-4 border-b border-gray-50 pb-2">
+                    <h4 class="text-sm font-bold text-gray-700 uppercase tracking-wide">Fee Collection (Monthly)</h4>
+                    <span class="font-urdu text-xs font-bold text-indigo-600">فیس کلیکشن ماہانہ</span>
+                </div>
+                <div class="h-56 relative w-full">
+                    <canvas id="chart-fee-line"></canvas>
+                </div>
+            </div>
+
+            <!-- C. Fee Collection Donut Status Status Card -->
+            <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between">
+                <div class="flex items-center justify-between mb-4 border-b border-gray-50 pb-2">
+                    <h4 class="text-sm font-bold text-gray-700 uppercase tracking-wide">Fee Collection Status</h4>
+                    <span class="font-urdu text-xs font-bold text-emerald-600">فیس کلیکشن سٹیٹس</span>
+                </div>
+                <div class="h-56 relative w-full flex justify-center items-center">
+                    <canvas id="chart-fee-status-donut"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- 5. RECENT ACTIVITIES & QUICK SHORTCUTS GRID ROW (BOTTOM ROW) -->
+        <!-- ========================================================================= -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            
+            <!-- Left Side Element: Recent Activities Box (5 Columns width equivalent) -->
+            <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm lg:col-span-5 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-4 border-b border-gray-50 pb-2">
+                        <h4 class="text-sm font-bold text-gray-700 uppercase tracking-wide">Recent Activities</h4>
+                        <span class="font-urdu text-xs font-bold text-amber-600">حالیhe سرگرمیاں</span>
+                    </div>
+                    
+                    <!-- Activities Sequential Rows Layout -->
+                    <div class="space-y-3">
+                        <!-- Activity Element item 1 -->
+                        <div class="flex items-center justify-between bg-slate-50 p-2.5 rounded-xl border border-gray-100">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs">👤</div>
+                                <div class="flex flex-col">
+                                    <span class="text-xs font-bold text-gray-800">نیا داخلہ شامل کیا: محمد علی، کلاس 1st</span>
+                                    <span class="text-[10px] text-gray-400">Admission completed successfully</span>
+                                </div>
+                            </div>
+                            <span class="text-[10px] font-bold text-gray-400 whitespace-nowrap">10:15 AM</span>
+                        </div>
+
+                        <!-- Activity Element item 2 -->
+                        <div class="flex items-center justify-between bg-slate-50 p-2.5 rounded-xl border border-gray-100">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center text-xs">💵</div>
+                                <div class="flex flex-col">
+                                    <span class="text-xs font-bold text-gray-800">فیس جمع ہوئی: محمد حسان، کلاس 5th</span>
+                                    <span class="text-[10px] text-gray-400">Receipt generated and sent via SMS</span>
+                                </div>
+                            </div>
+                            <span class="text-[10px] font-bold text-gray-400 whitespace-nowrap">09:45 AM</span>
+                        </div>
+
+                        <!-- Activity Element item 3 -->
+                        <div class="flex items-center justify-between bg-slate-50 p-2.5 rounded-xl border border-gray-100">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center text-xs">📝</div>
+                                <div class="flex flex-col">
+                                    <span class="text-xs font-bold text-gray-800">حاضری درج کی گئی: کلاس 3rd</span>
+                                    <span class="text-[10px] text-gray-400">Student daily attendance completed</span>
+                                </div>
+                            </div>
+                            <span class="text-[10px] font-bold text-gray-400 whitespace-nowrap">09:30 AM</span>
+                        </div>
+
+                        <!-- Activity Element item 4 -->
+                        <div class="flex items-center justify-between bg-slate-50 p-2.5 rounded-xl border border-gray-100">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center text-xs">📝</div>
+                                <div class="flex flex-col">
+                                    <span class="text-xs font-bold text-gray-800">امتحان شیڈول جاری کیا گیا</span>
+                                    <span class="text-[10px] text-gray-400">Exam routine published online</span>
+                                </div>
+                            </div>
+                            <span class="text-[10px] font-bold text-gray-400 whitespace-nowrap">Yesterday</span>
+                        </div>
+
+                        <!-- Activity Element item 5 -->
+                        <div class="flex items-center justify-between bg-slate-50 p-2.5 rounded-xl border border-gray-100">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-rose-100 text-rose-600 flex items-center justify-center text-xs">🔴</div>
+                                <div class="flex flex-col">
+                                    <span class="text-xs font-bold text-gray-800">نوٹس جاری کیا گیا: تعطیلی کے بارے میں</span>
+                                    <span class="text-[10px] text-gray-400">Official institutional notice broadcasted</span>
+                                </div>
+                            </div>
+                            <span class="text-[10px] font-bold text-gray-400 whitespace-nowrap">Yesterday</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side Element: Quick Shortcuts Matrix Layout grid (7 Columns width equivalent) -->
+            <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm lg:col-span-7 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-4 border-b border-gray-50 pb-2">
+                        <h4 class="text-sm font-bold text-gray-700 uppercase tracking-wide">Quick Shortcuts</h4>
+                        <span class="font-urdu text-xs font-bold text-purple-600">فوری لنکس</span>
+                    </div>
+
+                    <!-- Layout Matrix: 4 Columns per line on large monitors, 2 on compact targets -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                        
+                        <!-- Btn item 1: New Admission Link -->
+                        <a href="admission.html" class="flex flex-col items-center justify-center text-center p-3 rounded-xl border border-slate-100 bg-slate-50 hover:bg-blue-50 hover:border-blue-200 transition-all group shadow-sm">
+                            <span class="text-xl mb-1 transition-transform group-hover:scale-110">👤</span>
+                            <span class="text-[11px] font-bold text-gray-700">New Admission</span>
+                            <span class="font-urdu text-[10px] text-gray-400">نیا داخلہ</span>
+                        </a>
+
+                        <!-- Btn item 2: Collect Fee Link -->
+                        <a href="fee_counter.html" class="flex flex-col items-center justify-center text-center p-3 rounded-xl border border-slate-100 bg-slate-50 hover:bg-emerald-50 hover:border-emerald-200 transition-all group shadow-sm">
+                            <span class="text-xl mb-1 transition-transform group-hover:scale-110">💵</span>
+                            <span class="text-[11px] font-bold text-gray-700">Collect Fee</span>
+                            <span class="font-urdu text-[10px] text-gray-400">فیس جمع کریں</span>
+                        </a>
+
+                        <!-- Btn item 3: Mark Attendance Link -->
+                        <a href="#" class="flex flex-col items-center justify-center text-center p-3 rounded-xl border border-slate-100 bg-slate-50 hover:bg-amber-50 hover:border-amber-200 transition-all group shadow-sm">
+                            <span class="text-xl mb-1 transition-transform group-hover:scale-110">📅</span>
+                            <span class="text-[11px] font-bold text-gray-700">Mark Attendance</span>
+                            <span class="font-urdu text-[10px] text-gray-400">حاضری درج کریں</span>
+                        </a>
+
+                        <!-- Btn item 4: Enter Results Link -->
+                        <a href="#" class="flex flex-col items-center justify-center text-center p-3 rounded-xl border border-slate-100 bg-slate-50 hover:bg-purple-50 hover:border-purple-200 transition-all group shadow-sm">
+                            <span class="text-xl mb-1 transition-transform group-hover:scale-110">🏆</span>
+                            <span class="text-[11px] font-bold text-gray-700">Enter Results</span>
+                            <span class="font-urdu text-[10px] text-gray-400">نتائج درج کریں</span>
+                        </a>
+
+                        <!-- Btn item 5: Student List -->
+                        <a href="student_management.html" class="flex flex-col items-center justify-center text-center p-3 rounded-xl border border-slate-100 bg-slate-50 hover:bg-slate-100 transition-all group shadow-sm">
+                            <span class="text-xl mb-1 transition-transform group-hover:scale-110">📋</span>
+                            <span class="text-[11px] font-bold text-gray-700">Student List</span>
+                            <span class="font-urdu text-[10px] text-gray-400">طلبہ کی فہرست</span>
+                        </a>
+
+                        <!-- Btn item 6: Fee Report -->
+                        <a href="#" class="flex flex-col items-center justify-center text-center p-3 rounded-xl border border-slate-100 bg-slate-50 hover:bg-slate-100 transition-all group shadow-sm">
+                            <span class="text-xl mb-1 transition-transform group-hover:scale-110">📊</span>
+                            <span class="text-[11px] font-bold text-gray-700">Fee Report</span>
+                            <span class="font-urdu text-[10px] text-gray-400">فیس رپورٹ</span>
+                        </a>
+
+                        <!-- Btn item 7: Attendance Report -->
+                        <a href="#" class="flex flex-col items-center justify-center text-center p-3 rounded-xl border border-slate-100 bg-slate-50 hover:bg-slate-100 transition-all group shadow-sm">
+                            <span class="text-xl mb-1 transition-transform group-hover:scale-110">🗓️</span>
+                            <span class="text-[11px] font-bold text-gray-700">Attendance Report</span>
+                            <span class="font-urdu text-[10px] text-gray-400">حاضری رپورٹ</span>
+                        </a>
+
+                        <!-- Btn item 8: Issue Notice -->
+                        <a href="#" class="flex flex-col items-center justify-center text-center p-3 rounded-xl border border-slate-100 bg-slate-50 hover:bg-rose-50 hover:border-rose-200 transition-all group shadow-sm">
+                            <span class="text-xl mb-1 transition-transform group-hover:scale-110">📢</span>
+                            <span class="text-[11px] font-bold text-gray-700">Issue Notice</span>
+                            <span class="font-urdu text-[10px] text-gray-400">نوٹس جاری کریں</span>
+                        </a>
+
+                        <!-- Btn item 9: Book List -->
+                        <a href="#" class="flex flex-col items-center justify-center text-center p-3 rounded-xl border border-slate-100 bg-slate-50 hover:bg-slate-100 transition-all group shadow-sm">
+                            <span class="text-xl mb-1 transition-transform group-hover:scale-110">📚</span>
+                            <span class="text-[11px] font-bold text-gray-700">Book List</span>
+                            <span class="font-urdu text-[10px] text-gray-400">کتب کی فہرست</span>
+                        </a>
+
+                        <!-- Btn item 10: Staff List -->
+                        <a href="#" class="flex flex-col items-center justify-center text-center p-3 rounded-xl border border-slate-100 bg-slate-50 hover:bg-slate-100 transition-all group shadow-sm">
+                            <span class="text-xl mb-1 transition-transform group-hover:scale-110">💼</span>
+                            <span class="text-[11px] font-bold text-gray-700">Staff List</span>
+                            <span class="font-urdu text-[10px] text-gray-400">اسٹاف کی فہرست</span>
+                        </a>
+
+                        <!-- Btn item 11: Exam Schedule -->
+                        <a href="#" class="flex flex-col items-center justify-center text-center p-3 rounded-xl border border-slate-100 bg-slate-50 hover:bg-slate-100 transition-all group shadow-sm">
+                            <span class="text-xl mb-1 transition-transform group-hover:scale-110">📝</span>
+                            <span class="text-[11px] font-bold text-gray-700">Exam Schedule</span>
+                            <span class="font-urdu text-[10px] text-gray-400">امتحان شیڈول</span>
+                        </a>
+
+                        <!-- Btn item 12: Settings Component Link -->
+                        <a href="#" class="flex flex-col items-center justify-center text-center p-3 rounded-xl border border-slate-100 bg-slate-50 hover:bg-slate-100 transition-all group shadow-sm">
+                            <span class="text-xl mb-1 transition-transform group-hover:scale-110">⚙️</span>
+                            <span class="text-[11px] font-bold text-gray-700">Settings</span>
+                            <span class="font-urdu text-[10px] text-gray-400">سیٹنگز</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Institutional Legal Footer Statement info -->
+        <footer class="text-center text-xs font-semibold text-slate-400 pt-2 border-t border-gray-200/60 flex items-center justify-center gap-2">
+            <span>نوشت : یہ ڈیش بورڈ مدرسہ کے انتظامی کاموں کو آسان اور منظم بنانے کے لیے ڈیزائن کیا گیا ہے۔</span>
+        </footer>
+    </main>
+
+    <!-- ========================================================================= -->
+    <!-- CHART INTERACTIVE LOGIC SCRIPT ENGINE -->
+    <!-- ========================================================================= -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Update realtime system time dynamic preview display
+            function refreshTime() {
+                const clock = new Date();
+                let hrs = clock.getHours();
+                let mins = clock.getMinutes();
+                let meridian = hrs >= 12 ? 'PM' : 'AM';
+                hrs = hrs % 12;
+                hrs = hrs ? hrs : 12; // 0 should be 12
+                mins = mins < 10 ? '0' + mins : mins;
+                document.getElementById('current-time-lbl').innerText = hrs + ':' + mins + ' ' + meridian;
+            }
+            setInterval(refreshTime, 1000);
+            refreshTime();
+
+            // 1. CHART INITIALIZATION: Students by Class (Bar Chart)
+            const ctxBar = document.getElementById('chart-class-bar').getContext('2d');
+            new Chart(ctxBar, {
+                type: 'bar',
+                data: {
+                    labels: ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th'],
+                    datasets: [{
+                        label: 'Students Count',
+                        data: [120, 150, 180, 160, 140, 130, 90, 78],
+                        backgroundColor: '#2563eb',
+                        borderRadius: 6,
+                        barThickness: 16
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { grid: { color: '#f1f5f9' }, ticks: { font: { size: 10 } } },
+                        x: { grid: { display: false }, ticks: { font: { size: 10 } } }
+                    }
+                }
+            });
+
+            // 2. CHART INITIALIZATION: Monthly Fee Collection (Line Chart)
+            const ctxLine = document.getElementById('chart-fee-line').getContext('2d');
+            new Chart(ctxLine, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+                    datasets: [{
+                        data: [120000, 150000, 180000, 160000, 200000],
+                        borderColor: '#4f46e5',
+                        backgroundColor: 'rgba(79, 70, 229, 0.05)',
+                        fill: true,
+                        tension: 0.4,
+                        borderWidth: 3,
+                        pointBackgroundColor: '#4f46e5'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { grid: { color: '#f1f5f9' }, ticks: { font: { size: 10 } } },
+                        x: { grid: { display: false }, ticks: { font: { size: 10 } } }
+                    }
+                }
+            });
+
+            // 3. CHART INITIALIZATION: Fee Status Analysis (Donut Chart)
+            const ctxDonut = document.getElementById('chart-fee-status-donut').getContext('2d');
+            new Chart(ctxDonut, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Paid (65%)', 'Partial (20%)', 'Pending (15%)'],
+                    datasets: [{
+                        data: [65, 20, 15],
+                        backgroundColor: ['#10b981', '#3b82f6', '#f97316'],
+                        borderWidth: 2,
+                        borderColor: '#ffffff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: { boxWidth: 12, font: { size: 10, weight: 'bold' } }
+                        }
+                    },
+                    cutout: '70%'
+                }
+            });
+        });
+    </script>
+</body>
+</html>
