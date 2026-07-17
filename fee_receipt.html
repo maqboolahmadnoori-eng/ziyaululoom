@@ -3,269 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fee Receipt & Ledger - Ziyaul Uloom</title>
+    <title>Official Fee Desk - Ziyaul Uloom</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Poppins', sans-serif; background-color: #f4f6f9; }
+        body { font-family: 'Poppins', sans-serif; background-color: #f1f5f9; }
         .font-urdu { font-family: 'Noto Nastaliq Urdu', serif; line-height: 2.2; }
-        
-        /* 1 PAGE PRINT CONFIGURATION */
         @media print {
-            .no-print { display: none !important; }
-            body { 
-                background-color: white !important; 
-                padding: 0 !important; 
-                margin: 0 !important; 
-                -webkit-print-color-adjust: exact; 
-                print-color-adjust: exact;
-            }
-            .print-card { 
-                border: none !important; 
-                box-shadow: none !important; 
-                width: 100% !important;
-                max-width: 100% !important;
-                margin: 0 !important;
-                padding: 0 !important;
-            }
-            html {
-                zoom: 82%;
-            }
-            header {
-                padding: 4px 6px !important;
-            }
-            #studentProfileBanner {
-                padding: 6px 12px !important;
-                gap: 8px !important;
-            }
-            #studentProfileBanner > div {
-                padding: 3px !important;
-            }
-            #feeCollectionForm {
-                padding: 4px !important;
-                margin: 0 !important;
-            }
-            .p-4 {
-                padding: 6px !important;
-            }
-            .grid {
-                gap: 6px !important;
-            }
+            body * { visibility: hidden; }
+            #printReceiptArea, #printReceiptArea * { visibility: visible; }
+            #printReceiptArea { position: absolute; left: 0; top: 0; width: 100%; }
         }
     </style>
 </head>
-<body class="p-2 md:p-6">
+<body class="p-3 md:p-6">
 
-    <div class="max-w-6xl mx-auto bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden print-card">
+    <!-- MAIN DASHBOARD -->
+    <div class="max-w-5xl mx-auto bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden mb-10">
         
-        <!-- HEADER SECTION -->
-        <header class="bg-white border-b border-gray-200 p-4 flex flex-col md:flex-row justify-between items-center gap-4 relative">
+        <!-- HEADER -->
+        <div class="bg-[#0f294a] text-white p-5 flex flex-col md:flex-row justify-between items-center gap-4 border-b-4 border-emerald-500">
             <div class="flex items-center gap-4">
-                <div class="w-16 h-16 bg-[#0e2246] rounded-full flex items-center justify-center text-white font-bold text-xl shadow-md shrink-0">ZU</div>
-                <div>
-                    <h2 class="font-urdu text-2xl text-[#0e2246] font-bold mb-1 leading-normal">مدرسہ عربیہ ضیاء العلوم</h2>
-                    <h1 class="text-xl font-extrabold text-[#0e2246] tracking-wide uppercase">Madrasa Arabia Ziyaul Uloom</h1>
-                    <p class="text-[11px] text-gray-500 font-semibold">Chhawani Padrauna, Kushinagar (U.P.)</p>
+                <div class="w-14 h-14 bg-white text-[#0f294a] rounded-full flex items-center justify-center font-black text-2xl shadow-md">ZU</div>
+                <div class="text-center md:text-left">
+                    <h2 class="font-urdu text-xl font-bold text-emerald-300">مدرسہ عربیہ ضیاء العلوم</h2>
+                    <h1 class="text-base font-black tracking-wider">MADRASA ARABIA ZIYAUL ULOOM</h1>
+                    <p class="text-xs text-slate-300">Chhawani Padrauna, Kushinagar (U.P.)</p>
                 </div>
             </div>
-            
-            <div class="flex flex-col items-end gap-2 w-full md:w-auto">
-                <div class="flex items-center gap-2 no-print">
-                    <span class="bg-emerald-100 text-emerald-800 text-xs px-3 py-1 rounded-full font-bold border border-emerald-200 shadow-sm">💰 FEE RECEIPT / رسید فیس</span>
-                </div>
-                <div class="flex flex-row md:flex-col gap-2 w-full md:w-auto justify-end">
-                    <div class="bg-blue-50 px-3 py-1.5 rounded-lg border border-blue-100 flex items-center gap-2 text-xs font-bold text-gray-700">
-                        <span>Adm No / داخلہ نمبر:</span>
-                        <span id="displayAdmNo" class="text-blue-700 text-sm font-black">----</span>
-                    </div>
-                    <div class="bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-100 flex items-center gap-2 text-xs font-bold text-gray-600">
-                        <span>Date / तारीख:</span>
-                        <span id="displayDate" class="text-gray-700 font-bold">--/--/----</span>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <!-- STUDENT PROFILE BANNER -->
-        <div id="studentProfileBanner" class="bg-gradient-to-r from-[#0e2246] to-[#153066] text-white px-6 py-4 grid grid-cols-2 md:grid-cols-5 gap-4 border-b border-blue-900 shadow-inner">
-            <div class="bg-blue-950/40 p-2 rounded-lg border border-blue-800/30">
-                <span class="text-blue-200 block text-[11px] uppercase tracking-wider font-semibold">Student Name / नाम</span>
-                <span id="lblStudentName" class="font-black text-lg text-amber-300 block mt-1">Loading...</span>
-            </div>
-            <div class="bg-blue-950/40 p-2 rounded-lg border border-blue-800/30">
-                <span class="text-blue-200 block text-[11px] uppercase tracking-wider font-semibold">Father's Name / والد کا نام</span>
-                <span id="lblFatherName" class="font-bold text-base block text-white mt-1">Loading...</span>
-            </div>
-            <div class="bg-blue-950/40 p-2 rounded-lg border border-blue-800/30">
-                <span class="text-blue-200 block text-[11px] uppercase tracking-wider font-semibold">Class / दर्जा</span>
-                <span id="lblClass" class="font-black text-base block text-cyan-300 mt-1">Loading...</span>
-            </div>
-            <div class="bg-blue-950/40 p-2 rounded-lg border border-blue-800/30">
-                <span class="text-blue-200 block text-[11px] uppercase tracking-wider font-semibold">Date of Birth / जन्मतिथि</span>
-                <span id="lblDOB" class="font-bold text-base block text-white mt-1">--/--/----</span>
-            </div>
-            <div class="col-span-2 md:col-span-1 bg-blue-950/40 p-2 rounded-lg border border-blue-800/30">
-                <span class="text-blue-200 block text-[11px] uppercase tracking-wider font-semibold">Address / पता</span>
-                <span id="lblAddress" class="font-medium text-sm text-slate-200 block truncate mt-1">Loading...</span>
+            <div class="bg-[#1e3e62] px-5 py-3 rounded-2xl text-center border border-blue-900/50 min-w-[200px]">
+                <span class="inline-block bg-emerald-500 text-white font-bold text-[10px] px-2.5 py-0.5 rounded-full uppercase mb-1">🟢 Fee Counter</span>
+                <div class="text-xs font-semibold text-slate-300">Adm No: <span id="lblAdmNo" class="text-white font-black text-sm">----</span></div>
+                <div class="text-xs font-semibold text-slate-300">Date: <span id="lblCurrentDate" class="text-white">--/--/----</span></div>
             </div>
         </div>
 
-        <!-- MAIN FEE FORM -->
-        <form id="feeCollectionForm" onsubmit="saveFeePayment(event)" class="p-4 space-y-4">
-            <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
-                <div class="bg-[#0e2246] text-white px-4 py-1.5 flex justify-between items-center text-xs font-bold uppercase tracking-wider">
-                    <span>Fee Collector Desk</span>
-                    <span class="font-urdu text-sm text-white">کاؤنٹر برائے وصولی فیس</span>
-                </div>
-                
-                <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <!-- Column 1 -->
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between border-b pb-1">
-                            <label class="text-xs font-bold text-gray-700">Admission Fee</label>
-                            <input type="number" id="feeAdmission" value="0" class="w-40 p-1 text-center border rounded font-bold text-xs" oninput="calculateTotals()">
-                        </div>
-                        
-                        <div class="flex items-center justify-between border-b pb-1 bg-blue-50/50 p-1.5 rounded-lg">
-                            <div>
-                                <label class="text-xs font-bold text-blue-900 block">Tuition Month(s)</label>
-                                <select id="tuitionMonthsCount" class="p-1 text-xs rounded border font-semibold bg-white" onchange="autoCalculateTuition()">
-                                    <option value="0">0 Month</option>
-                                    <option value="1" selected>1 Month</option>
-                                    <option value="2">2 Months</option>
-                                    <option value="3">3 Months</option>
-                                    <option value="4">4 Months</option>
-                                    <option value="5">5 Months</option>
-                                    <option value="6">6 Months</option>
-                                    <option value="12">12 Months</option>
-                                </select>
-                            </div>
-                            <div class="text-right">
-                                <span class="text-[10px] block text-gray-500 font-bold">Total Tuition Fee</span>
-                                <input type="number" id="feeTuition" value="0" class="w-40 p-1 text-center border border-blue-300 rounded font-bold text-sm text-blue-800 bg-blue-50" oninput="calculateTotals()">
-                            </div>
-                        </div>
+        <!-- SEARCH DESK -->
+        <div class="bg-[#1e293b] p-4 text-white flex flex-col sm:flex-row gap-3 items-center justify-between border-b border-slate-700">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">🔍 Student Search Desk / तलाश छात्र</span>
+            <div class="flex w-full sm:w-auto gap-2">
+                <input type="text" id="txtSearchAdm" placeholder="Enter Admission No..." class="bg-slate-800 border border-slate-600 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-blue-500 w-full sm:w-64">
+                <button id="btnSearch" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-6 py-2 rounded-xl transition-all whitespace-nowrap">
+                    SEARCH / तलाश करें
+                </button>
+            </div>
+        </div>
 
-                        <div class="flex items-center justify-between border-b pb-1">
-                            <label class="text-xs font-bold text-gray-700">Books & Copies</label>
-                            <input type="number" id="feeBooks" value="0" class="w-40 p-1 text-center border rounded font-bold text-xs" oninput="calculateTotals()">
-                        </div>
+        <!-- PROFILE BRIEF AREA -->
+        <div class="bg-slate-50 p-4 border-b border-slate-200 grid grid-cols-2 md:grid-cols-5 gap-4 text-xs">
+            <div>
+                <span class="text-[10px] text-slate-400 block font-bold">STUDENT NAME</span>
+                <span id="lblStudentName" class="font-bold text-slate-800 text-sm block truncate">----</span>
+            </div>
+            <div>
+                <span class="text-[10px] text-slate-400 block font-bold">FATHER'S NAME</span>
+                <span id="lblFatherName" class="font-bold text-slate-800 text-sm block truncate">----</span>
+            </div>
+            <div>
+                <span class="text-[10px] text-slate-400 block font-bold">CLASS / दर्जा</span>
+                <span id="lblClass" class="font-bold text-blue-600 text-sm">----</span>
+            </div>
+            <div>
+                <span class="text-[10px] text-slate-400 block font-bold">VAN DISTANCE</span>
+                <span id="lblVan" class="font-bold text-slate-800 text-sm">----</span>
+            </div>
+            <div class="col-span-2 md:col-span-1">
+                <span class="text-[10px] text-slate-400 block font-bold">MOBILE / मोबाइल</span>
+                <span id="lblMobile" class="font-bold text-slate-800 text-sm">----</span>
+            </div>
+        </div>
 
-                        <div class="flex items-center justify-between border-b pb-1">
-                            <label class="text-xs font-bold text-gray-700">Maintenance Charges</label>
-                            <input type="number" id="feeMaintenance" value="0" class="w-40 p-1 text-center border rounded font-bold text-xs" oninput="calculateTotals()">
-                        </div>
+        <!-- NOT LOADED STATE -->
+        <div id="noStudentArea" class="p-12 text-center bg-white">
+            <div class="w-16 h-16 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 border border-blue-150">
+                <span class="text-2xl">⚠️</span>
+            </div>
+            <h3 class="text-slate-800 font-extrabold text-lg">कोई छात्र लोड नहीं है!</h3>
+            <p class="text-slate-400 text-xs mt-1">कृपया ऊपर बॉक्स में एडमिशन नंबर लिखकर सर्च करें।</p>
+        </div>
+
+        <!-- FEE TRANSACTION DESK -->
+        <div id="feeFormArea" class="hidden grid grid-cols-1 lg:grid-cols-3 gap-6 p-6">
+            
+            <!-- INPUT HEADS -->
+            <div class="lg:col-span-2 space-y-4">
+                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider border-b pb-1.5">Enter Fee Details</h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-500 mb-1">Admission Fee (داخلہ فیس)</label>
+                        <input type="number" id="txtAdmissionFee" class="fee-input w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:bg-white" value="0">
                     </div>
-
-                    <!-- Column 2 -->
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between border-b pb-1">
-                            <label class="text-xs font-bold text-gray-700">Form Fee</label>
-                            <input type="number" id="feeForm" value="0" class="w-40 p-1 text-center border rounded font-bold text-xs" oninput="calculateTotals()">
-                        </div>
-
-                        <div class="flex flex-col gap-2 border border-amber-200 bg-amber-50/40 p-2 rounded-lg">
-                            <div class="flex justify-between items-center">
-                                <label class="text-xs font-bold text-amber-900">Van Distance (KM)</label>
-                                <select id="vanKmSelection" class="p-1 text-xs rounded border font-semibold bg-white w-40" onchange="autoCalculateVan()">
-                                    <option value="0">No Van / वैन नहीं है</option>
-                                    <option value="1">1 KM (₹350/mo)</option>
-                                    <option value="2">2 KM (₹450/mo)</option>
-                                    <option value="3">3 KM (₹550/mo)</option>
-                                    <option value="4">4 KM (₹650/mo)</option>
-                                    <option value="5">5 KM (₹750/mo)</option>
-                                    <option value="6">6 KM (₹850/mo)</option>
-                                    <option value="7">7 KM (₹950/mo)</option>
-                                    <option value="8">8 KM (₹1050/mo)</option>
-                                    <option value="9">9 KM (₹1150/mo)</option>
-                                    <option value="10">10 KM (₹1250/mo)</option>
-                                    <option value="11">11 KM (₹1350/mo)</option>
-                                    <option value="12">12 KM (₹1450/mo)</option>
-                                    <option value="13">13 KM (₹1550/mo)</option>
-                                    <option value="14">14 KM (₹1650/mo)</option>
-                                    <option value="15">15 KM (₹1750/mo)</option>
-                                </select>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <label class="text-xs font-bold text-amber-900">Van Month(s)</label>
-                                <select id="vanMonthsCount" class="p-1 text-xs rounded border font-semibold bg-white" onchange="autoCalculateVan()">
-                                    <option value="0">0 Month</option>
-                                    <option value="1">1 Month</option>
-                                    <option value="2">2 Months</option>
-                                    <option value="3">3 Months</option>
-                                    <option value="4">4 Months</option>
-                                    <option value="5">5 Months</option>
-                                    <option value="6">6 Months</option>
-                                    <option value="12">12 Months</option>
-                                </select>
-                                <input type="number" id="feeVan" value="0" class="w-40 p-1 text-center border border-amber-300 rounded font-bold text-sm text-amber-800 bg-amber-50" oninput="calculateTotals()">
-                            </div>
-                        </div>
-
-                        <div class="flex items-center justify-between border-b pb-1">
-                            <label class="text-xs font-bold text-gray-700">Uniform / Dress Fee</label>
-                            <input type="number" id="feeUniform" value="0" class="w-40 p-1 text-center border rounded font-bold text-xs" oninput="calculateTotals()">
-                        </div>
-
-                        <div class="flex items-center justify-between border-b pb-1">
-                            <label class="text-xs font-bold text-gray-700">Other Charges</label>
-                            <input type="number" id="feeOther" value="0" class="w-40 p-1 text-center border rounded font-bold text-xs" oninput="calculateTotals()">
-                        </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-500 mb-1">Form Fee (فارم فیس)</label>
+                        <input type="number" id="txtFormFee" class="fee-input w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:bg-white" value="0">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-500 mb-1">Monthly Fee (ٹیوشن فیس)</label>
+                        <input type="number" id="txtTuitionFee" class="fee-input w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-blue-600 focus:bg-white" value="0" readonly>
+                        <p class="text-[9px] text-slate-400 mt-1">Rate: ₹<span id="rateTuition">0</span>/month (राइट साइड से महीने चुनें)</p>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-500 mb-1">Van Fee (گاڑی فیس)</label>
+                        <input type="number" id="txtVanFee" class="fee-input w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-purple-600 focus:bg-white" value="0" readonly>
+                        <p class="text-[9px] text-slate-400 mt-1">Rate: ₹<span id="rateVan">0</span>/month (राइट साइड से महीने चुनें)</p>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-500 mb-1">Exam Fee (امتحان فیس)</label>
+                        <input type="number" id="txtExamFee" class="fee-input w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:bg-white" value="0">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-500 mb-1">Maintenance Charges (میٹی نینس)</label>
+                        <input type="number" id="txtMaintenanceFee" class="fee-input w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:bg-white" value="0">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-500 mb-1">Books & Copies (کتاب فیس)</label>
+                        <input type="number" id="txtBooksFee" class="fee-input w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:bg-white" value="0">
+                    </div>
+                    <div>
+                        <label class="block class-label text-[11px] font-bold text-slate-500 mb-1">Uniform & Dress (یونیفارم)</label>
+                        <input type="number" id="txtDressFee" class="fee-input w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:bg-white" value="0">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-[11px] font-bold text-slate-500 mb-1">Other Fee (متفرق فیس)</label>
+                        <input type="number" id="txtOtherFee" class="fee-input w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:bg-white" value="0">
                     </div>
                 </div>
             </div>
 
-            <!-- TOTALS BANNER -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                <div class="bg-blue-50 border border-blue-200 rounded-xl p-3 text-center">
-                    <span class="text-[10px] font-bold text-blue-900 block uppercase">GRAND TOTAL / कुल रकम</span>
-                    <h3 id="lblGrandTotal" class="text-2xl font-black text-blue-900">₹ 0</h3>
+            <!-- PANEL MONTHS & BILLING -->
+            <div class="space-y-4">
+                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider border-b pb-1.5 flex justify-between">
+                    <span>Select Months / महीने चुनें</span>
+                </h3>
+
+                <div class="bg-slate-100 p-1.5 rounded-xl grid grid-cols-2 gap-1 text-center text-[10px] font-bold">
+                    <button id="btnTabTuition" class="bg-white py-1.5 rounded-lg shadow-sm text-slate-800">TUITION MONTHS</button>
+                    <button id="btnTabVan" class="py-1.5 rounded-lg text-slate-500 hover:text-slate-800">VAN MONTHS</button>
                 </div>
-                <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-2 text-center">
-                    <span class="text-[10px] font-bold text-emerald-900 block uppercase">TOTAL PAID / जमा राशि</span>
-                    <input type="number" id="inputTotalPaid" value="0" class="w-full mt-1 bg-white border border-emerald-300 rounded text-center text-lg font-bold text-emerald-800 p-1">
-                </div>
-                <div class="bg-rose-50 border border-rose-200 rounded-xl p-3 text-center">
-                    <span class="text-[10px] font-bold text-rose-900 block uppercase">TOTAL DUE / बाकी रकम</span>
-                    <h3 id="lblTotalDue" class="text-2xl font-black text-rose-900">₹ 0</h3>
+
+                <div id="areaTuitionMonths" class="grid grid-cols-3 gap-1.5 text-[10px]"></div>
+                <div id="areaVanMonths" class="grid grid-cols-3 gap-1.5 text-[10px] hidden"></div>
+
+                <!-- NET CALCULATOR BOX -->
+                <div class="bg-slate-900 text-white p-4 rounded-2xl space-y-2 text-xs mt-4">
+                    <div class="flex justify-between border-b border-slate-700 pb-1.5">
+                        <span class="text-slate-400">Previous Balance:</span>
+                        <span id="lblPrevDue" class="font-bold">₹0</span>
+                    </div>
+                    <div class="flex justify-between border-b border-slate-700 pb-1.5">
+                        <span class="text-slate-400">Current Total:</span>
+                        <span id="lblCurrentTotal" class="font-bold text-emerald-400">₹0</span>
+                    </div>
+                    <div class="flex justify-between border-b border-slate-700 pb-1.5">
+                        <span class="text-slate-400">Net Payable:</span>
+                        <span id="lblNetPayable" class="font-black text-sm">₹0</span>
+                    </div>
+                    <div class="pt-1.5 space-y-1">
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase">Amount Paid (जमा राशि)</label>
+                        <input type="number" id="txtAmountPaid" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white font-black text-center focus:outline-none focus:border-emerald-500" value="0">
+                    </div>
+                    <div class="flex justify-between pt-1 border-t border-slate-800 text-xs">
+                        <span class="text-rose-400 font-bold">Remaining Due:</span>
+                        <span id="lblRemainingDue" class="font-black text-rose-400">₹0</span>
+                    </div>
+
+                    <button id="btnSaveReceipt" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs py-3 rounded-xl transition-all shadow-md mt-3">
+                        💾 SAVE, PRINT & WHATSAPP
+                    </button>
                 </div>
             </div>
 
-            <!-- DOUBLE COLUMN LEDGER -->
-            <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
-                <div class="bg-slate-800 text-white px-4 py-1.5 flex justify-between items-center text-xs font-bold uppercase tracking-wider">
-                    <span>April to March - Digital Card Visual Ledger</span>
-                    <span class="font-urdu text-sm text-white">اپریل تا مارچ - ڈیجیٹل لیجر رپورٹ</span>
-                </div>
-                <div class="p-3 overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200 text-xs text-center border">
-                        <thead class="bg-slate-100 font-bold text-slate-700 border-b">
-                            <tr>
-                                <th class="p-2 border-r text-left pl-4">Month / مہینہ</th>
-                                <th class="p-2 border-r">Monthly Fee / ماہانہ فیس</th>
-                                <th class="p-2">Van Fee / گاڑی کا کرایہ</th>
-                            </tr>
-                        </thead>
-                        <tbody id="ledgerTableBody" class="divide-y divide-gray-100">
-                            <!-- Dynamic rows will load here -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- FORM BUTTONS -->
-            <div class="flex items-center justify-end gap-2 pt-2 border-t border-gray-200 no-print">
-                <button type="button" onclick="history.back()" class="bg-white border text-gray-700 font-bold text-xs px-4 py-2 rounded-xl hover:bg-gray-50">⬅️ Back</button>
-                <button type="submit" class="bg-[#0e2246] text-white font-bold text-xs px-5 py-2 rounded-xl hover:bg-slate-800 shadow-md">💾 Save & Update Ledger</button>
-                <button type="button" onclick="window.print()" class="bg-emerald-600 text-white font-bold text-xs px-5 py-2 rounded-xl hover:bg-emerald-700 shadow-md">🖨️ Print Receipt</button>
-            </div>
-        </form>
+        </div>
     </div>
 
-    <!-- FIREBASE CLIENT MODULES -->
+    <!-- PRINT SLIP VIEW -->
+    <div id="printReceiptArea" class="hidden max-w-xs bg-white p-4 mx-auto border border-dashed border-slate-300 text-[10px] leading-tight text-slate-800">
+        <div class="text-center border-b pb-2 mb-2">
+            <h2 class="font-urdu text-base font-bold text-slate-900 leading-normal">مدرسہ عربیہ ضیاء العلوم</h2>
+            <h1 class="text-xs font-black">MADRASA ARABIA ZIYAUL ULOOM</h1>
+            <p class="text-[8px] text-slate-500">Chhawani Padrauna, Kushinagar (U.P.)</p>
+            <p class="text-[9px] font-bold mt-1 bg-slate-100 py-0.5 rounded">OFFICIAL FEE RECEIPT / فیس رسید</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-y-1 mb-2 border-b pb-1.5">
+            <div>Receipt No: <span id="prtReceiptNo" class="font-bold">--</span></div>
+            <div class="text-right">Date: <span id="prtDate" class="font-bold">--</span></div>
+            <div>Adm No: <span id="prtAdmNo" class="font-bold">--</span></div>
+            <div class="text-right">Class: <span id="prtClass" class="font-bold">--</span></div>
+            <div class="col-span-2">Student: <span id="prtStudent" class="font-bold uppercase">--</span></div>
+            <div class="col-span-2">Father: <span id="prtFather" class="font-bold uppercase">--</span></div>
+        </div>
+
+        <table class="w-full text-left mb-2 text-[9px]">
+            <thead>
+                <tr class="border-b font-bold text-slate-600">
+                    <th class="py-1">Fee Description</th>
+                    <th class="py-1 text-right">Amount</th>
+                </tr>
+            </thead>
+            <tbody id="prtTableBody"></tbody>
+        </table>
+
+        <div class="border-t pt-1.5 space-y-1 text-right text-[9px] font-bold">
+            <div class="flex justify-between"><span>Previous Due:</span><span id="prtPrevDue">₹0</span></div>
+            <div class="flex justify-between"><span>Current Bill:</span><span id="prtCurrentTotal">₹0</span></div>
+            <div class="flex justify-between border-b pb-1"><span>Total Payable:</span><span id="prtNetPayable">₹0</span></div>
+            <div class="flex justify-between text-slate-900 text-[11px] font-black"><span>Amount Paid:</span><span id="prtPaid">₹0</span></div>
+            <div class="flex justify-between text-rose-600"><span>Remaining Due:</span><span id="prtRemainingDue">₹0</span></div>
+        </div>
+
+        <div class="text-center mt-6 pt-4 border-t border-dashed border-slate-200">
+            <p class="text-[8px] text-slate-500">Thank you for your timely payments!</p>
+            <p class="text-[8px] font-urdu text-slate-500 mt-0.5">شکریہ جزاک اللہ خیرا</p>
+        </div>
+    </div>
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        import { getDatabase, ref, get, update } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCGgsuCGuuGXJ4JZW_bb202XJy532PXVMA",
@@ -280,254 +236,303 @@
         const app = initializeApp(firebaseConfig);
         const database = getDatabase(app);
 
-        let studentBaseTuitionFee = 500;
-        let currentStudentClass = "";
-        let userEditedPaid = false;
-        let studentData = null;
-
-        let dbLedger = { tuition: {}, van: {} };
-        let localLedger = { tuition: {}, van: {} };
-
         const monthsList = [
-            { id: "april", name: "April (اپریل)" }, { id: "may", name: "May (مئی)" }, { id: "june", name: "June (جون)" },
-            { id: "july", name: "July (جولائی)" }, { id: "august", name: "August (اگست)" }, { id: "september", name: "September (ستمبر)" },
-            { id: "october", name: "October (اکتوبر)" }, { id: "november", name: "November (نومبر)" }, { id: "december", name: "December (دسمبر)" },
-            { id: "january", name: "January (جنوری)" }, { id: "february", name: "February (فروری)" }, { id: "march", name: "March (مارچ)" }
+            { id: "april", name: "April / اپریل" }, { id: "may", name: "May / مئی" }, { id: "june", name: "June / جون" },
+            { id: "july", name: "July / جولائی" }, { id: "august", name: "August / اگست" }, { id: "september", name: "Sept / ستمبر" },
+            { id: "october", name: "Oct / اکتوبر" }, { id: "november", name: "Nov / نومبر" }, { id: "december", name: "Dec / دسمبر" },
+            { id: "january", name: "Jan / جنوری" }, { id: "february", name: "Feb / فروری" }, { id: "march", name: "March / مارچ" }
         ];
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const admissionNo = urlParams.get('id');
+        let loadedStudent = null;
+        let tFeeRate = 0;
+        let vFeeRate = 0;
+        let prevDueAmount = 0;
+
+        // FIXED 100% ACCURATE CLASS TUITION FEE RULE
+        function getFixedTuitionRate(className) {
+            if (!className) return 0;
+            let c = className.toLowerCase().trim();
+            if (c.includes('nursery') || c.includes('lkg') || c.includes('u.k.g') || c.includes('ukg') || c.includes('l.k.g')) {
+                return 400;
+            }
+            if (c.includes('1') || c.includes('2') || c.includes('3') || c.includes('4') || c.includes('5') || c.includes('st') || c.includes('nd') || c.includes('rd') || c.includes('th') && (c.includes('1')||c.includes('2')||c.includes('3')||c.includes('4')||c.includes('5'))) {
+                // Double safe numeric range check
+                let num = parseInt(c.replace(/[^0-9]/g, ''));
+                if (num >= 1 && num <= 5) return 500;
+                if (num >= 6 && num <= 10) return 600;
+                
+                if (c.includes('1') || c.includes('2') || c.includes('3') || c.includes('4') || c.includes('5')) return 500;
+            }
+            if (c.includes('6') || c.includes('7') || c.includes('8') || c.includes('9') || c.includes('10')) {
+                return 600;
+            }
+            // Textual matches fallback
+            if(c.includes('one') || c.includes('two') || c.includes('three') || c.includes('four') || c.includes('five')) return 500;
+            if(c.includes('six') || c.includes('seven') || c.includes('eight') || c.includes('nine') || c.includes('ten')) return 600;
+            
+            return 500; // global safe fallback
+        }
+
+        // FIXED 100% ACCURATE VAN FEE RULE 
+        function getFixedVanRate(distance) {
+            let km = Number(distance) || 0;
+            if (km <= 0) return 0;
+            if (km > 15) km = 15; // Capped at 15km
+            return 350 + (km - 1) * 100;
+        }
 
         window.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('displayDate').innerText = new Date().toLocaleDateString('en-GB');
+            const urlParams = new URLSearchParams(window.location.search);
+            const admissionNo = urlParams.get('id') || urlParams.get('adm'); // Detects both perfectly
             
-            if (!admissionNo) {
-                alert("Error: URL me valid Admission Number nahi mila!");
-                return;
-            }
-            
-            document.getElementById('displayAdmNo').innerText = admissionNo;
-            fetchStudentProfile(admissionNo);
+            document.getElementById('lblCurrentDate').innerText = new Date().toLocaleDateString('en-GB');
 
-            const paidInput = document.getElementById('inputTotalPaid');
-            paidInput.addEventListener('input', () => {
-                userEditedPaid = true;
-                window.calculateTotals();
-            });
-            paidInput.addEventListener('blur', function() {
-                if (this.value === "" || parseFloat(this.value) === 0) {
-                    userEditedPaid = false;
-                    window.calculateTotals();
-                }
-            });
+            if (admissionNo) {
+                document.getElementById('txtSearchAdm').value = admissionNo;
+                loadStudentDetails(admissionNo);
+            }
         });
 
-        function fetchStudentProfile(admNo) {
-            const studentRef = ref(database, 'students/' + admNo);
+        document.getElementById('btnSearch').addEventListener('click', () => {
+            const adm = document.getElementById('txtSearchAdm').value.trim();
+            if (adm) loadStudentDetails(adm);
+        });
+
+        function loadStudentDetails(adm) {
+            const studentRef = ref(database, 'students/' + adm);
             get(studentRef).then((snapshot) => {
                 if (snapshot.exists()) {
                     const data = snapshot.val();
-                    studentData = data;
-                    
+                    loadedStudent = data;
+                    loadedStudent.admNo = adm;
+
+                    document.getElementById('lblAdmNo').innerText = adm;
                     document.getElementById('lblStudentName').innerText = data.studentName || "N/A";
                     document.getElementById('lblFatherName').innerText = data.fatherName || "N/A";
                     document.getElementById('lblClass').innerText = data.studentClass || "N/A";
-                    document.getElementById('lblDOB').innerText = data.dob || "--/--/----";
-                    document.getElementById('lblAddress').innerText = data.address || "N/A";
-                    
-                    currentStudentClass = data.studentClass || "";
-                    studentBaseTuitionFee = calculateBaseTuition(currentStudentClass);
-                    
-                    dbLedger = data.ledger || { tuition: {}, van: {} };
-                    if (!dbLedger.tuition) dbLedger.tuition = {};
-                    if (!dbLedger.van) dbLedger.van = {};
-                    
-                    localLedger = JSON.parse(JSON.stringify(dbLedger));
+                    document.getElementById('lblMobile').innerText = data.mobileNo || "N/A";
 
-                    window.autoCalculateTuition();
-                    window.autoCalculateVan();
-                    renderLedgerTable();
+                    // Apply rules instantly
+                    tFeeRate = getFixedTuitionRate(data.studentClass);
+                    document.getElementById('rateTuition').innerText = tFeeRate;
+
+                    let km = Number(data.vanDistance) || 0;
+                    vFeeRate = getFixedVanRate(km);
+                    document.getElementById('rateVan').innerText = vFeeRate;
+                    document.getElementById('lblVan').innerText = km > 0 ? `${km} KM (₹${vFeeRate}/Mo)` : "No Van";
+
+                    prevDueAmount = 0;
+                    if (data.receipts) {
+                        let list = Object.values(data.receipts);
+                        list.sort((a, b) => new Date(b.date) - new Date(a.date));
+                        if (list.length > 0) prevDueAmount = Number(list[0].due) || 0;
+                    }
+                    document.getElementById('lblPrevDue').innerText = `₹${prevDueAmount}`;
+
+                    document.getElementById('noStudentArea').classList.add('hidden');
+                    document.getElementById('feeFormArea').classList.remove('hidden');
+
+                    const textInputs = ['txtAdmissionFee', 'txtFormFee', 'txtExamFee', 'txtMaintenanceFee', 'txtBooksFee', 'txtDressFee', 'txtOtherFee', 'txtAmountPaid'];
+                    textInputs.forEach(id => document.getElementById(id).value = 0);
+
+                    renderMonthlyChecklists(data.ledger);
+                    calculateBill();
                 } else {
-                    alert("Admission No. records me nahi mila!");
+                    alert("कोई रिकॉर्ड नहीं मिला!");
+                    resetDashboard();
                 }
-            }).catch(err => console.error(err));
+            }).catch(() => alert("त्रुटि: डेटा लोड नहीं हो सका!"));
         }
 
-        function calculateBaseTuition(studentClass) {
-            if (!studentClass) return 500;
-            const cls = studentClass.toLowerCase().trim();
-            if (cls.includes('nursery') || cls.includes('lkg') || cls.includes('l.k.g') || cls.includes('ukg') || cls.includes('u.k.g')) return 400;
-            if (cls.includes('1') || cls.includes('2') || cls.includes('3') || cls.includes('4') || cls.includes('5') || 
-                cls.includes('1st') || cls.includes('2nd') || cls.includes('3rd') || cls.includes('4th') || cls.includes('5th')) return 500;
-            if (cls.includes('6') || cls.includes('7') || cls.includes('8') || cls.includes('9') || cls.includes('10') || 
-                cls.includes('6th') || cls.includes('7th') || cls.includes('8th') || cls.includes('9th') || cls.includes('10th')) return 600;
-            return 500;
+        function resetDashboard() {
+            document.getElementById('noStudentArea').classList.remove('hidden');
+            document.getElementById('feeFormArea').classList.add('hidden');
         }
 
-        window.autoCalculateTuition = function() {
-            const monthsSelected = parseInt(document.getElementById('tuitionMonthsCount').value) || 0;
-            const totalTuitionCalculated = studentBaseTuitionFee * monthsSelected;
-            document.getElementById('feeTuition').value = totalTuitionCalculated;
+        function renderMonthlyChecklists(ledger) {
+            let tuitionLedger = ledger?.tuition || ledger || {};
+            let vanLedger = ledger?.van || {};
 
-            localLedger.tuition = JSON.parse(JSON.stringify(dbLedger.tuition));
-            
-            let count = 0;
-            for (let i = 0; i < monthsList.length; i++) {
-                const mId = monthsList[i].id;
-                if (!dbLedger.tuition[mId]) {
-                    if (count < monthsSelected) {
-                        localLedger.tuition[mId] = true;
-                        count++;
-                    }
-                }
-            }
-            renderLedgerTable();
-            window.calculateTotals();
-        };
+            const tContainer = document.getElementById('areaTuitionMonths');
+            const vContainer = document.getElementById('areaVanMonths');
+            tContainer.innerHTML = ''; vContainer.innerHTML = '';
 
-        window.autoCalculateVan = function() {
-            const kmSelected = parseInt(document.getElementById('vanKmSelection').value) || 0;
-            const monthsSelected = parseInt(document.getElementById('vanMonthsCount').value) || 0;
-            
-            let baseVanFee = 0;
-            if (kmSelected > 0) {
-                baseVanFee = 350 + (kmSelected - 1) * 100;
-            }
-            
-            const totalVanCalculated = baseVanFee * monthsSelected;
-            document.getElementById('feeVan').value = totalVanCalculated;
-
-            localLedger.van = JSON.parse(JSON.stringify(dbLedger.van));
-            
-            let count = 0;
-            for (let i = 0; i < monthsList.length; i++) {
-                const mId = monthsList[i].id;
-                if (!dbLedger.van[mId]) {
-                    if (count < monthsSelected) {
-                        localLedger.van[mId] = true;
-                        count++;
-                    }
-                }
-            }
-            renderLedgerTable();
-            window.calculateTotals();
-        };
-
-        window.calculateTotals = function() {
-            const adm = parseFloat(document.getElementById('feeAdmission').value) || 0;
-            const tui = parseFloat(document.getElementById('feeTuition').value) || 0;
-            const bks = parseFloat(document.getElementById('feeBooks').value) || 0;
-            const mnt = parseFloat(document.getElementById('feeMaintenance').value) || 0;
-            const frm = parseFloat(document.getElementById('feeForm').value) || 0;
-            const van = parseFloat(document.getElementById('feeVan').value) || 0;
-            const uni = parseFloat(document.getElementById('feeUniform').value) || 0;
-            const oth = parseFloat(document.getElementById('feeOther').value) || 0;
-
-            const grandTotal = adm + tui + bks + mnt + frm + van + uni + oth;
-            document.getElementById('lblGrandTotal').innerText = "₹ " + grandTotal;
-
-            const paidInputEl = document.getElementById('inputTotalPaid');
-            if (!userEditedPaid) {
-                paidInputEl.value = grandTotal;
-                document.getElementById('lblTotalDue').innerText = "₹ 0";
-            } else {
-                const totalPaidInput = parseFloat(paidInputEl.value) || 0;
-                const totalDue = grandTotal - totalPaidInput;
-                document.getElementById('lblTotalDue').innerText = "₹ " + totalDue;
-            }
-        };
-
-        function renderLedgerTable() {
-            const tbody = document.getElementById('ledgerTableBody');
-            tbody.innerHTML = "";
-            
             monthsList.forEach(m => {
-                const tPaid = localLedger.tuition[m.id] === true;
-                const vPaid = localLedger.van[m.id] === true;
-                
-                const tColor = tPaid ? 'bg-emerald-100 text-emerald-800 border-emerald-300' : 'bg-rose-100 text-rose-800 border-rose-300';
-                const tLabel = tPaid ? '🟢 Paid' : '🔴 Pending';
-                
-                const vColor = vPaid ? 'bg-emerald-100 text-emerald-800 border-emerald-300' : 'bg-rose-100 text-rose-800 border-rose-300';
-                const vLabel = vPaid ? '🟢 Paid' : '🔴 Pending';
-                
-                const row = `
-                    <tr class="hover:bg-slate-50">
-                        <td class="p-2 border-r text-left pl-4 font-semibold text-slate-700">${m.name}</td>
-                        <td class="p-2 border-r">
-                            <span class="text-[10px] font-bold px-3 py-1 rounded-full border cursor-pointer select-none inline-block w-24 text-center ${tColor}" onclick="window.toggleMonthStatus('tuition', '${m.id}')">
-                                ${tLabel}
-                            </span>
-                        </td>
-                        <td class="p-2">
-                            <span class="text-[10px] font-bold px-3 py-1 rounded-full border cursor-pointer select-none inline-block w-24 text-center ${vColor}" onclick="window.toggleMonthStatus('van', '${m.id}')">
-                                ${vLabel}
-                            </span>
-                        </td>
-                    </tr>
+                const tPaid = tuitionLedger[m.id] === true;
+                const vPaid = vanLedger[m.id] === true;
+
+                tContainer.innerHTML += `
+                    <label class="flex items-center gap-1.5 p-2 rounded-lg border ${tPaid ? 'bg-emerald-50 border-emerald-200 text-emerald-800' : 'bg-white text-slate-700'}">
+                        <input type="checkbox" class="tuition-chk ${tPaid ? 'hidden' : ''}" data-month="${m.id}" ${tPaid ? 'checked disabled' : ''}>
+                        <span>${m.name} ${tPaid ? '🟢' : ''}</span>
+                    </label>
                 `;
-                tbody.innerHTML += row;
+                vContainer.innerHTML += `
+                    <label class="flex items-center gap-1.5 p-2 rounded-lg border ${vPaid ? 'bg-emerald-50 border-emerald-200 text-emerald-800' : 'bg-white text-slate-700'}">
+                        <input type="checkbox" class="van-chk ${vPaid ? 'hidden' : ''}" data-month="${m.id}" ${vPaid ? 'checked disabled' : ''}>
+                        <span>${m.name} ${vPaid ? '🟢' : ''}</span>
+                    </label>
+                `;
+            });
+
+            document.querySelectorAll('.tuition-chk, .van-chk').forEach(el => {
+                el.addEventListener('change', () => {
+                    const tCount = Array.from(document.querySelectorAll('.tuition-chk:not([disabled]):checked')).length;
+                    document.getElementById('txtTuitionFee').value = tCount * tFeeRate;
+                    const vCount = Array.from(document.querySelectorAll('.van-chk:not([disabled]):checked')).length;
+                    document.getElementById('txtVanFee').value = vCount * vFeeRate;
+                    calculateBill();
+                });
             });
         }
 
-        window.toggleMonthStatus = function(type, monthId) {
-            localLedger[type][monthId] = !localLedger[type][monthId];
-            renderLedgerTable();
-        };
+        document.querySelectorAll('.fee-input, #txtAmountPaid').forEach(el => el.addEventListener('input', calculateBill));
 
-        // POPUP BYPASS SUBMIT TRANSACTION RECORD UPGRADE
-        window.saveFeePayment = function(event) {
-            event.preventDefault();
-            const grandTotal = parseFloat(document.getElementById('lblGrandTotal').innerText.replace('₹ ', '')) || 0;
-            const amountPaid = parseFloat(document.getElementById('inputTotalPaid').value) || 0;
+        function calculateBill() {
+            const adm = Number(document.getElementById('txtAdmissionFee').value) || 0;
+            const form = Number(document.getElementById('txtFormFee').value) || 0;
+            const tuit = Number(document.getElementById('txtTuitionFee').value) || 0;
+            const van = Number(document.getElementById('txtVanFee').value) || 0;
+            const exam = Number(document.getElementById('txtExamFee').value) || 0;
+            const maint = Number(document.getElementById('txtMaintenanceFee').value) || 0;
+            const book = Number(document.getElementById('txtBooksFee').value) || 0;
+            const dress = Number(document.getElementById('txtDressFee').value) || 0;
+            const other = Number(document.getElementById('txtOtherFee').value) || 0;
+
+            const currentTotal = adm + form + tuit + van + exam + maint + book + dress + other;
+            document.getElementById('lblCurrentTotal').innerText = `₹${currentTotal}`;
             
-            if(grandTotal === 0) {
-                alert("Pehle koi fees amount select karein!");
-                return;
-            }
-
-            // 1. OPEN BLANK TRUSTED TAB IMMEDIATELY BEFORE FIREBASE ASYNC CALLS TO BYPASS POPUP BLOCKER
-            const whatsappWindow = window.open('', '_blank');
-
-            const studentLedgerRef = ref(database, `students/${admissionNo}/ledger`);
-            const transactionRef = ref(database, `finance_ledger/${admissionNo}/${Date.now()}`);
+            const netPayable = currentTotal + prevDueAmount;
+            document.getElementById('lblNetPayable').innerText = `₹${netPayable}`;
             
-            const txnPayload = {
-                date: new Date().toISOString().split('T')[0],
-                grandTotal: grandTotal,
-                paid: amountPaid,
-                due: grandTotal - amountPaid,
-                classAtPaymentTime: currentStudentClass
+            const amountPaid = Number(document.getElementById('txtAmountPaid').value) || 0;
+            document.getElementById('lblRemainingDue').innerText = `₹${netPayable - amountPaid}`;
+        }
+
+        document.getElementById('btnTabTuition').addEventListener('click', () => {
+            document.getElementById('areaTuitionMonths').classList.remove('hidden');
+            document.getElementById('areaVanMonths').classList.add('hidden');
+        });
+        document.getElementById('btnTabVan').addEventListener('click', () => {
+            document.getElementById('areaTuitionMonths').classList.add('hidden');
+            document.getElementById('areaVanMonths').classList.remove('hidden');
+        });
+
+        // SAVE, PRINT & AUTOMATIC WHATSAPP ACTION
+        document.getElementById('btnSaveReceipt').addEventListener('click', () => {
+            if (!loadedStudent) return;
+
+            const adm = Number(document.getElementById('txtAdmissionFee').value) || 0;
+            const form = Number(document.getElementById('txtFormFee').value) || 0;
+            const tuit = Number(document.getElementById('txtTuitionFee').value) || 0;
+            const van = Number(document.getElementById('txtVanFee').value) || 0;
+            const exam = Number(document.getElementById('txtExamFee').value) || 0;
+            const maint = Number(document.getElementById('txtMaintenanceFee').value) || 0;
+            const book = Number(document.getElementById('txtBooksFee').value) || 0;
+            const dress = Number(document.getElementById('txtDressFee').value) || 0;
+            const other = Number(document.getElementById('txtOtherFee').value) || 0;
+
+            const currentTotal = adm + form + tuit + van + exam + maint + book + dress + other;
+            const amountPaid = Number(document.getElementById('txtAmountPaid').value) || 0;
+
+            const rNo = "R-" + Math.floor(100000 + Math.random() * 900000);
+            const dateStr = new Date().toISOString().split('T')[0];
+
+            const selectedTuitionMonths = Array.from(document.querySelectorAll('.tuition-chk:not([disabled]):checked')).map(el => el.getAttribute('data-month'));
+            const selectedVanMonths = Array.from(document.querySelectorAll('.van-chk:not([disabled]):checked')).map(el => el.getAttribute('data-month'));
+
+            const receiptData = {
+                receiptNo: rNo, date: dateStr, admissionFee: adm, formFee: form,
+                tuitionPaid: tuit, tuitionMonths: selectedTuitionMonths.join(', ') || 'N/A',
+                vanPaid: van, vanMonths: selectedVanMonths.join(', ') || 'N/A',
+                examFee: exam, maintenanceFee: maint, booksFee: book, dressFee: dress, otherFee: other,
+                total: currentTotal, paid: amountPaid, due: (currentTotal + prevDueAmount) - amountPaid
             };
 
-            set(studentLedgerRef, localLedger)
-            .then(() => {
-                return set(transactionRef, txnPayload);
-            })
-            .then(() => {
-                // 2. DATABASE WRITE SUCCESSFUL -> POPULATE LINK IN OPEN TAB
-                const parentMobile = studentData.mobile1 || studentData.mobile || "";
-                if (!parentMobile) {
-                    if (whatsappWindow) whatsappWindow.close();
-                    alert("Mobile No. 1 available nahi hai WhatsApp ke liye!");
-                    return;
+            const updates = {};
+            updates[`students/${loadedStudent.admNo}/receipts/${rNo}`] = receiptData;
+            selectedTuitionMonths.forEach(m => updates[`students/${loadedStudent.admNo}/ledger/tuition/${m}`] = true);
+            selectedVanMonths.forEach(m => updates[`students/${loadedStudent.admNo}/ledger/van/${m}`] = true);
+
+            update(ref(database), updates).then(() => {
+                // Construct & open WhatsApp Message Automatically
+                sendWhatsAppNotification(receiptData);
+                
+                // Trigger Local Print View
+                triggerPrintView(receiptData);
+            }).catch(() => alert("डेटाबेस सेव एरर!"));
+        });
+
+        function sendWhatsAppNotification(receipt) {
+            let mobile = loadedStudent.mobileNo ? loadedStudent.mobileNo.trim() : "";
+            if(!mobile) return;
+            
+            // Format phone number safely
+            if (!mobile.startsWith('91') && mobile.length === 10) mobile = '91' + mobile;
+
+            const portalLink = `https://maqboolahmadnoori-eng.github.io/ziyaululoom/status.html?adm=${loadedStudent.admNo}`;
+            
+            const messageText = 
+`السلام علیکم ورحمة اللہ وبرکاتہ
+*MADRASA ARABIA ZIYAUL ULOOM*
+---------------------------------------
+عزیز سرپرست، طالب علم *${loadedStudent.studentName.toUpperCase()}* کی فیس جمع کر لی گئی ہے۔
+
+*رسیڈ تفصیل (Receipt Summary):*
+• رسیڈ نمبر: ${receipt.receiptNo}
+• داخلہ نمبر: ${loadedStudent.admNo}
+• कुल फीस बिल: ₹${receipt.total}
+• जमा की गई रकम: ₹${receipt.paid}
+• बाकी रकम (Due): ₹${receipt.due}
+
+👉 ऑनलाइन रसीद और पूरा डिजिटल लेजर कार्ड (Ledger Card) यहाँ लाइव देखें:
+${portalLink}
+---------------------------------------
+شکریہ جزاک اللہ خیرا`;
+
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=${mobile}&text=${encodeURIComponent(messageText)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        function triggerPrintView(receipt) {
+            document.getElementById('prtReceiptNo').innerText = receipt.receiptNo;
+            document.getElementById('prtDate').innerText = new Date(receipt.date).toLocaleDateString('en-GB');
+            document.getElementById('prtAdmNo').innerText = loadedStudent.admNo;
+            document.getElementById('prtClass').innerText = loadedStudent.studentClass || "N/A";
+            document.getElementById('prtStudent').innerText = loadedStudent.studentName || "N/A";
+            document.getElementById('prtFather').innerText = loadedStudent.fatherName || "N/A";
+
+            const tbody = document.getElementById('prtTableBody');
+            tbody.innerHTML = '';
+
+            const items = [
+                { name: "Admission Fee", val: receipt.admissionFee },
+                { name: "Form Fee", val: receipt.formFee },
+                { name: `Monthly Fee (${receipt.tuitionMonths})`, val: receipt.tuitionPaid },
+                { name: `Van Fee (${receipt.vanMonths})`, val: receipt.vanPaid },
+                { name: "Exam Fee", val: receipt.examFee },
+                { name: "Maintenance Charges", val: receipt.maintenanceFee },
+                { name: "Books & Copies", val: receipt.booksFee },
+                { name: "Uniform & Dress", val: receipt.dressFee },
+                { name: "Other Fees", val: receipt.otherFee }
+            ];
+
+            items.forEach(i => {
+                if (i.val > 0) {
+                    tbody.innerHTML += `<tr class="border-b border-slate-100"><td class="py-1">${i.name}</td><td class="py-1 text-right">₹${i.val}</td></tr>`;
                 }
-                const studentName = studentData.studentName || "Student";
-                const statusLink = `https://maqboolahmadnoori-eng.github.io/ziyaululoom/status.html?adm=${admissionNo}`;
-                const message = `السلام علیکم (Assalamu Alaikum),\n\n*Madrasa Arabia Ziyaul Uloom*\n\nStudent *${studentName}* (Adm: ${admissionNo}) ki fees submit ho gayi hai.\n\nLive Digital Ledger Card check karne ke liye niche link par click karein:\n👉 ${statusLink}\n\nShukriya!\nمدرسا प्रशासन`;
-                
-                // Load URL without gesture error
-                whatsappWindow.location.href = `https://wa.me/91${parentMobile}?text=${encodeURIComponent(message)}`;
-                
-                alert("ماشااللہ! फीस रिकॉर्ड और डिजिटल लेजर सफलतापूर्वक अपडेट हो गया है। WhatsApp मैसेज भेज दिया गया है।");
-            })
-            .catch(err => {
-                // Close the tab if firebase save fails
-                if (whatsappWindow) whatsappWindow.close();
-                console.error(err);
-                alert("Save karne me database error!");
             });
-        };
+
+            document.getElementById('prtPrevDue').innerText = `₹${prevDueAmount}`;
+            document.getElementById('prtCurrentTotal').innerText = `₹${receipt.total}`;
+            document.getElementById('prtNetPayable').innerText = `₹${receipt.total + prevDueAmount}`;
+            document.getElementById('prtPaid').innerText = `₹${receipt.paid}`;
+            document.getElementById('prtRemainingDue').innerText = `₹${receipt.due}`;
+
+            document.getElementById('printReceiptArea').classList.remove('hidden');
+            window.print();
+            window.location.reload();
+        }
     </script>
 </body>
 </html>
