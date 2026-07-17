@@ -3,55 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Fee Status - Ziyaul Uloom</title>
+    <title>Online Student Ledger Portal - Ziyaul Uloom</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Poppins', sans-serif; background-color: #f4f6f9; }
+        body { font-family: 'Poppins', sans-serif; background-color: #f8fafc; }
         .font-urdu { font-family: 'Noto Nastaliq Urdu', serif; line-height: 2.2; }
     </style>
 </head>
-<body class="p-2 sm:p-4 md:p-8">
+<body class="p-2 sm:p-4 bg-slate-100">
 
-    <div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden mb-6">
+    <div class="max-w-md mx-auto bg-white rounded-2xl shadow-2xl border border-slate-250 overflow-hidden">
         
         <!-- HEADER -->
-        <div class="bg-gradient-to-r from-[#0e2246] to-[#153066] text-white p-5 text-center">
-            <h2 class="font-urdu text-xl md:text-2xl font-bold mb-1">مدرسہ عربیہ ضیاء العلوم</h2>
-            <h1 class="text-base md:text-lg font-bold tracking-wide uppercase">Madrasa Arabia Ziyaul Uloom</h1>
-            <p class="text-[11px] text-blue-200">Online Student Ledger Portal / آن لائن رپورٹ</p>
+        <div class="bg-[#0f294a] text-white p-5 text-center relative">
+            <h2 class="font-urdu text-xl font-bold text-center block mb-1">مدرسہ عربیہ ضیاء العلوم</h2>
+            <h1 class="text-sm font-bold tracking-wider uppercase">MADRASA ARABIA ZIYAUL ULOOM</h1>
+            <p class="text-[11px] text-blue-200 mt-0.5">Online Student Ledger Portal / آن لائن رپورٹ</p>
         </div>
 
-        <!-- PROFILE DATA -->
-        <div class="p-4 border-b border-gray-100 bg-slate-50 grid grid-cols-2 gap-3 text-xs md:text-sm">
-            <div class="col-span-2 border-b pb-2 text-center font-bold text-sm md:text-base text-slate-800">
-                Admission No / داخلہ نمبر: <span id="lblAdmNo" class="text-blue-600 font-black">---</span>
+        <!-- PROFILE AREA -->
+        <div class="p-4 border-b border-slate-100 bg-white">
+            <div class="text-center mb-3">
+                <span class="text-xs text-slate-500 font-bold">Admission No / داخلہ نمبر:</span>
+                <span id="lblAdmNo" class="text-blue-600 font-black text-sm ml-1">----</span>
             </div>
-            <div>
-                <span class="text-gray-400 block text-[10px] uppercase font-bold">STUDENT NAME / नाम</span>
-                <span id="lblStudentName" class="font-black text-slate-800 text-xs md:text-sm block truncate">Loading...</span>
-            </div>
-            <div>
-                <span class="text-gray-400 block text-[10px] uppercase font-bold">FATHER'S NAME / والد کا نام</span>
-                <span id="lblFatherName" class="font-bold text-slate-800 text-xs md:text-sm block truncate">Loading...</span>
-            </div>
-            <div>
-                <span class="text-gray-400 block text-[10px] uppercase font-bold">CLASS / दर्जा</span>
-                <span id="lblClass" class="font-black text-cyan-600 text-xs md:text-sm">Loading...</span>
-            </div>
-            <div>
-                <span class="text-gray-400 block text-[10px] uppercase font-bold">STATUS / स्थिति</span>
-                <span class="bg-emerald-100 text-emerald-800 text-[9px] px-2 py-0.5 rounded-full font-black border border-emerald-200 inline-block">Active / Verified</span>
+
+            <div class="grid grid-cols-2 gap-3 text-xs">
+                <div class="border-b pb-1.5">
+                    <span class="text-[10px] text-slate-400 block font-semibold">STUDENT NAME / नाम</span>
+                    <span id="lblStudentName" class="font-bold text-slate-800 text-sm block truncate">----</span>
+                </div>
+                <div class="border-b pb-1.5">
+                    <span class="text-[10px] text-slate-400 block font-semibold">FATHER'S NAME / والد کا نام</span>
+                    <span id="lblFatherName" class="font-bold text-slate-800 text-sm block truncate">----</span>
+                </div>
+                <div>
+                    <span class="text-[10px] text-slate-400 block font-semibold">CLASS / दर्जा</span>
+                    <span id="lblClass" class="font-bold text-blue-600 text-sm">----</span>
+                </div>
+                <div>
+                    <span class="text-[10px] text-slate-400 block font-semibold">STATUS / स्थिति</span>
+                    <span id="lblStatus" class="inline-block bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full font-bold text-[9px] mt-0.5">Active / Verified</span>
+                </div>
             </div>
         </div>
 
-        <!-- LIVE DUAL LEDGER AREA (JavaScript will inject the table here safely) -->
-        <div id="liveLedgerArea" class="p-4">
-            <div class="text-center text-gray-400 text-xs py-6">Live database records loading...</div>
+        <!-- ACCOUNT SUMMARY CARD -->
+        <div class="p-4 bg-slate-50 border-b border-slate-200">
+            <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2.5 flex justify-between">
+                <span>Fee Account Summary</span>
+                <span class="font-urdu text-slate-800 text-[11px]">خلاصہ فیس</span>
+            </h3>
+            
+            <div class="grid grid-cols-2 gap-2 mb-3 text-xs">
+                <div class="bg-white p-2.5 rounded-xl border border-slate-200 shadow-sm">
+                    <span class="text-[9px] text-slate-400 block font-bold">TUITION RATE / ट्यूशन फीस</span>
+                    <span id="lblTuitionRate" class="text-xs font-black text-slate-800">₹0 / Month</span>
+                </div>
+                <div class="bg-white p-2.5 rounded-xl border border-slate-200 shadow-sm">
+                    <span class="text-[9px] text-slate-400 block font-bold">VAN RATE / गाड़ी किराया</span>
+                    <span id="lblVanRate" class="text-xs font-black text-slate-800">₹0 / Month</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 text-center text-xs">
+                <div class="bg-emerald-600 text-white p-3 rounded-xl shadow-md">
+                    <span class="text-[9px] text-emerald-200 block font-semibold uppercase">TOTAL PAID / कुल जमा</span>
+                    <span id="lblTotalPaid" class="text-base font-black block mt-0.5">₹0</span>
+                </div>
+                <div class="bg-rose-600 text-white p-3 rounded-xl shadow-md">
+                    <span class="text-[9px] text-rose-200 block font-semibold uppercase">REMAINING DUE / कुल बाकी</span>
+                    <span id="lblTotalDue" class="text-base font-black block mt-0.5">₹0</span>
+                </div>
+            </div>
         </div>
-        
-        <div class="bg-slate-50 p-3 border-t border-gray-100 text-center text-[10px] text-gray-400 font-semibold">
-            * This is a live computer generated ledger card connected with Madrasa Counter.
+
+        <!-- DIGITAL LEDGER -->
+        <div class="p-4 border-b border-slate-100 bg-white">
+            <h3 class="text-center font-bold text-slate-800 text-xs mb-3 flex items-center justify-center gap-1.5">
+                <span>April to March - Live Ledger Card</span>
+                <span class="font-urdu text-[#0f294a] text-xs">اپریل تا مارچ ڈیجیٹل لیجر</span>
+            </h3>
+
+            <div class="overflow-hidden rounded-xl border border-slate-200">
+                <table class="min-w-full divide-y divide-slate-100 text-center text-[11px]">
+                    <thead class="bg-slate-50 font-bold text-slate-600">
+                        <tr>
+                            <th class="p-2 text-left pl-3 border-r">Month / مہینہ</th>
+                            <th class="p-2 border-r">Monthly Fee</th>
+                            <th class="p-2">Van Fee</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblLedgerBody" class="divide-y divide-slate-100">
+                        <!-- Loaded dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- TRANSACTION & RECEIPT HISTORY -->
+        <div class="p-4 bg-slate-50">
+            <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2.5 flex justify-between items-center">
+                <span>Payment Receipts History</span>
+                <span class="font-urdu text-slate-800 text-[11px]">رسیدوں کی تفصیل</span>
+            </h3>
+
+            <div id="receiptsList" class="space-y-2">
+                <p class="text-center text-slate-400 text-xs py-4">Loading receipts history...</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- RECEIPT DETAIL POPUP MODAL -->
+    <div id="receiptModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-5 shadow-2xl border border-slate-100 text-xs">
+            <div class="flex justify-between items-center border-b pb-2 mb-3">
+                <h4 class="font-bold text-slate-800 text-sm">Receipt Breakdown / تفصیل</h4>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 font-bold text-base">✕</button>
+            </div>
+
+            <div class="space-y-2 text-slate-600">
+                <div class="flex justify-between border-b pb-1">
+                    <span>Receipt No / رسیڈ نمبر:</span>
+                    <span id="popReceiptNo" class="font-bold text-slate-800">--</span>
+                </div>
+                <div class="flex justify-between border-b pb-1">
+                    <span>Date / تاریخ:</span>
+                    <span id="popDate" class="font-bold text-slate-800">--</span>
+                </div>
+
+                <div class="space-y-1 bg-slate-50 p-2.5 rounded-xl border border-slate-100" id="popBreakdownArea">
+                    <!-- Dynamic details go here -->
+                </div>
+
+                <div class="pt-2 border-t">
+                    <div class="flex justify-between text-slate-800 font-bold">
+                        <span>Total Bill / कुल बिल:</span>
+                        <span id="popTotal">₹0</span>
+                    </div>
+                    <div class="flex justify-between text-emerald-600 font-extrabold text-sm">
+                        <span>Amount Paid / जमा:</span>
+                        <span id="popPaid">₹0</span>
+                    </div>
+                    <div class="flex justify-between text-rose-600 font-bold">
+                        <span>Balance Due / बाकी:</span>
+                        <span id="popDue">₹0</span>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="closeModal()" class="w-full mt-4 bg-slate-800 hover:bg-slate-950 text-white font-bold py-2 rounded-xl text-[11px] transition-all">
+                CLOSE / बंद करें
+            </button>
         </div>
     </div>
 
@@ -73,52 +178,58 @@
         const database = getDatabase(app);
 
         const urlParams = new URLSearchParams(window.location.search);
-        let admissionNo = urlParams.get('adm');
+        const admissionNo = urlParams.get('adm');
 
         const monthsList = [
             { id: "april", name: "April (اپریل)" }, { id: "may", name: "May (مئی)" }, { id: "june", name: "June (جون)" },
-            { id: "july", name: "July (جولائی)" }, { id: "august", name: "August (اگست)" }, { id: "september", name: "September (ستمبر)" },
-            { id: "october", name: "October (اکتوبر)" }, { id: "november", name: "November (نومبر)" }, { id: "december", name: "December (دسمبر)" },
+            { id: "july", name: "July (جولائی)" }, { id: "august", name: "August (اگست)" }, { id: "september", name: "September (تمبر)" },
+            { id: "october", name: "October (اکتوبر)" }, { id: "november", name: "November (نومबर)" }, { id: "december", name: "December (دسمبر)" },
             { id: "january", name: "January (جنوری)" }, { id: "february", name: "February (فروری)" }, { id: "march", name: "March (مارچ)" }
         ];
 
+        let globalReceipts = {};
+
         window.addEventListener('DOMContentLoaded', () => {
-            if (!admissionNo) {
-                admissionNo = prompt("कृपया छात्र का एडमिशन नंबर (Admission No.) दर्ज करें:");
-                if (!admissionNo) {
-                    document.getElementById('liveLedgerArea').innerHTML = `<div class="p-4 text-center text-rose-500 font-bold text-xs">Admission Number required to view ledger!</div>`;
-                    return;
-                }
-                window.history.replaceState(null, '', `?adm=${admissionNo}`);
+            if (admissionNo) {
+                document.getElementById('lblAdmNo').innerText = admissionNo;
+                fetchStudentPortalData(admissionNo);
             }
-            
-            document.getElementById('lblAdmNo').innerText = admissionNo;
-            fetchStudentLedger();
         });
 
-        function fetchStudentLedger() {
-            const studentRef = ref(database, 'students/' + admissionNo);
+        function fetchStudentPortalData(adm) {
+            const studentRef = ref(database, 'students/' + adm);
             get(studentRef).then((snapshot) => {
                 if (snapshot.exists()) {
                     const data = snapshot.val();
+                    
                     document.getElementById('lblStudentName').innerText = data.studentName || "N/A";
                     document.getElementById('lblFatherName').innerText = data.fatherName || "N/A";
                     document.getElementById('lblClass').innerText = data.studentClass || "N/A";
 
-                    renderLedgerTableStructure(data.ledger);
-                } else {
-                    document.getElementById('liveLedgerArea').innerHTML = `<div class="p-4 text-center text-red-500 font-bold text-xs">Record Not Found! Yeh status register nahi hai.</div>`;
+                    const tFee = Number(data.tuitionFee) || 0;
+                    document.getElementById('lblTuitionRate').innerText = `₹${tFee} / Month`;
+
+                    let vFee = 0;
+                    if (data.vanDistance && Number(data.vanDistance) > 0) {
+                        const dist = Number(data.vanDistance);
+                        vFee = 350 + (dist - 1) * 100;
+                    }
+                    document.getElementById('lblVanRate').innerText = `₹${vFee} / Month`;
+
+                    renderLedgerCard(data.ledger);
+
+                    if (data.receipts) {
+                        globalReceipts = data.receipts;
+                        renderReceiptsHistory(data.receipts);
+                    } else {
+                        document.getElementById('receiptsList').innerHTML = `<p class="text-center text-slate-400 text-xs py-3">No transactions recorded.</p>`;
+                    }
                 }
-            }).catch(err => {
-                console.error(err);
-                document.getElementById('liveLedgerArea').innerHTML = `<div class="p-4 text-center text-red-500 text-xs">Database load error!</div>`;
-            });
+            }).catch(err => console.error(err));
         }
 
-        function renderLedgerTableStructure(ledgerData) {
-            const container = document.getElementById('liveLedgerArea');
-            
-            // Safe parser for flat legacy map or new column object structure
+        function renderLedgerCard(ledgerData) {
+            const tbody = document.getElementById('tblLedgerBody');
             let tuitionLedger = {};
             let vanLedger = {};
 
@@ -128,63 +239,119 @@
                     vanLedger = ledgerData.van || {};
                 } else {
                     tuitionLedger = ledgerData || {};
-                    vanLedger = {};
                 }
             }
 
-            // Build full responsive HTML table inside Javascript to guarantee zero template failures
-            let tableHtml = `
-                <h3 class="font-bold text-slate-800 mb-3 border-b pb-2 flex justify-between items-center text-xs md:text-sm">
-                    <span>April to March - Live Ledger Card</span>
-                    <span class="font-urdu text-[#0e2246] text-sm">اپریل تا مارچ ڈیجیٹل لیجر</span>
-                </h3>
-                <div class="overflow-hidden rounded-xl border border-gray-200 shadow-sm bg-white">
-                    <table class="min-w-full divide-y divide-gray-200 text-[11px] md:text-xs text-center">
-                        <thead class="bg-slate-100 font-bold text-slate-700">
-                            <tr>
-                                <th class="p-2.5 text-left pl-3 border-r">Month / مہینہ</th>
-                                <th class="p-2.5 border-r">Monthly Fee</th>
-                                <th class="p-2.5">Van Fee</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-100">
-            `;
-
+            let html = '';
             monthsList.forEach(m => {
                 const tPaid = tuitionLedger[m.id] === true;
                 const vPaid = vanLedger[m.id] === true;
 
-                const tColor = tPaid ? 'bg-emerald-100 text-emerald-800 border-emerald-300' : 'bg-rose-100 text-rose-800 border-rose-300';
-                const tLabel = tPaid ? '🟢 Paid' : '🔴 Pending';
+                const tBadge = tPaid ? '<span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">🟢 Paid</span>' 
+                                     : '<span class="text-[10px] font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded-full border border-rose-200">🔴 Pending</span>';
 
-                const vColor = vPaid ? 'bg-emerald-100 text-emerald-800 border-emerald-300' : 'bg-rose-100 text-rose-800 border-rose-300';
-                const vLabel = vPaid ? '🟢 Paid' : '🔴 Pending';
+                const vBadge = vPaid ? '<span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">🟢 Paid</span>' 
+                                     : '<span class="text-[10px] font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded-full border border-rose-200">🔴 Pending</span>';
 
-                tableHtml += `
+                html += `
                     <tr class="hover:bg-slate-50 transition-colors">
                         <td class="p-2 border-r text-left pl-3 font-semibold text-slate-700">${m.name}</td>
-                        <td class="p-2 border-r">
-                            <span class="text-[9px] md:text-[10px] font-black px-2 py-0.5 rounded-full ${tColor} inline-block w-20 text-center">
-                                ${tLabel}
-                            </span>
-                        </td>
-                        <td class="p-2">
-                            <span class="text-[9px] md:text-[10px] font-black px-2 py-0.5 rounded-full ${vColor} inline-block w-20 text-center">
-                                ${vLabel}
-                            </span>
-                        </td>
+                        <td class="p-2 border-r">${tBadge}</td>
+                        <td class="p-2">${vBadge}</td>
                     </tr>
                 `;
             });
-
-            tableHtml += `
-                        </tbody>
-                    </table>
-                </div>
-            `;
-
-            container.innerHTML = tableHtml;
+            tbody.innerHTML = html;
         }
+
+        function renderReceiptsHistory(receiptsObj) {
+            const container = document.getElementById('receiptsList');
+            let totalPaid = 0;
+            let lastRemainingDue = 0;
+
+            let receiptsList = [];
+            for (let key in receiptsObj) {
+                receiptsList.push({ id: key, ...receiptsObj[key] });
+            }
+
+            receiptsList.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            let html = '';
+            receiptsList.forEach((r, idx) => {
+                totalPaid += Number(r.paid) || 0;
+                if (idx === 0) lastRemainingDue = Number(r.due) || 0;
+
+                const formattedDate = new Date(r.date).toLocaleDateString('en-GB', {
+                    day: '2-digit', month: 'short', year: 'numeric'
+                });
+
+                html += `
+                    <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
+                        <div>
+                            <div class="font-bold text-slate-800 text-[11px]">${r.receiptNo || "N/A"}</div>
+                            <div class="text-[9px] text-slate-400 font-semibold mt-0.5">${formattedDate}</div>
+                        </div>
+                        <div class="text-right flex items-center gap-2">
+                            <div>
+                                <div class="text-xs font-black text-emerald-600">₹${r.paid}</div>
+                                <div class="text-[8px] text-slate-400 font-bold uppercase">PAID / जमा</div>
+                            </div>
+                            <button onclick="openReceiptModal('${r.id}')" class="bg-blue-50 text-blue-600 hover:bg-blue-100 text-[10px] font-bold px-2 py-1.5 rounded-lg ml-1">
+                                View / विवरण
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+            document.getElementById('lblTotalPaid').innerText = `₹${totalPaid.toLocaleString('en-IN')}`;
+            document.getElementById('lblTotalDue').innerText = `₹${lastRemainingDue.toLocaleString('en-IN')}`;
+        }
+
+        window.openReceiptModal = function(receiptId) {
+            const receipt = globalReceipts[receiptId];
+            if (!receipt) return;
+
+            document.getElementById('popReceiptNo').innerText = receipt.receiptNo || "--";
+            document.getElementById('popDate').innerText = new Date(receipt.date).toLocaleDateString('en-GB');
+
+            let breakdownHtml = '';
+            const fields = [
+                { label: "Admission Fee (داخلہ فیس)", value: receipt.admissionFee },
+                { label: "Form Fee (فارم فیس)", value: receipt.formFee },
+                { label: `Tuition Fee (${receipt.tuitionMonths || "0 Mo"})`, value: receipt.tuitionPaid },
+                { label: `Van Fee (${receipt.vanMonths || "0 Mo"})`, value: receipt.vanPaid },
+                { label: "Books & Copies (کتاب فیس)", value: receipt.booksFee },
+                { label: "Maintenance Charges (میٹی نینس)", value: receipt.maintenanceFee },
+                { label: "Uniform & Dress (یونیفارم)", value: receipt.dressFee },
+                { label: "Other Fee (متفرق فیس)", value: receipt.otherFee }
+            ];
+
+            fields.forEach(f => {
+                if (f.value && Number(f.value) > 0) {
+                    breakdownHtml += `
+                        <div class="flex justify-between text-slate-600 border-b border-dashed pb-0.5 mb-0.5">
+                            <span>${f.label}:</span>
+                            <span class="font-bold text-slate-800">₹${f.value}</span>
+                        </div>
+                    `;
+                }
+            });
+
+            if (!breakdownHtml) breakdownHtml = `<div class="text-center text-slate-400">No breakdowns saved.</div>`;
+
+            document.getElementById('popBreakdownArea').innerHTML = breakdownHtml;
+            document.getElementById('popTotal').innerText = `₹${receipt.total || 0}`;
+            document.getElementById('popPaid').innerText = `₹${receipt.paid || 0}`;
+            document.getElementById('popDue').innerText = `₹${receipt.due || 0}`;
+
+            document.getElementById('receiptModal').classList.remove('hidden');
+        };
+
+        window.closeModal = function() {
+            document.getElementById('receiptModal').classList.add('hidden');
+        };
     </script>
 </body>
 </html>
